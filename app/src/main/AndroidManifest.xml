@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GB_PLibs_HW_App">
         <activity
-            android:name=".presenter.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
