@@ -6,7 +6,6 @@ import com.example.gb_plibs_hw_app.presenter.repository.NumListenerRepository
 class ChangeNumOnButtonUseCase(private val numListenerRepository: NumListenerRepository) {
 
     fun execute(param: CounterModel): Int {
-        val result = numListenerRepository.changeNum(inputNum = param)
-        return result
+        return numListenerRepository.changeNum(inputNum = param)
     }
 }

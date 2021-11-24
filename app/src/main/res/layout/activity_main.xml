@@ -19,7 +19,7 @@
         android:id="@+id/main_btn_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_one"
+        android:text="@string/counter_two"
         app:layout_constraintBottom_toTopOf="@id/main_text_view_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@id/main_btn_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_btn_1"/>
+        app:layout_constraintTop_toBottomOf="@id/main_btn_1" />
 
     <Button
         android:id="@+id/main_btn_2"
