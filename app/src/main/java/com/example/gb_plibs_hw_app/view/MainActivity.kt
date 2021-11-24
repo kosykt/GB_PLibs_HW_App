@@ -1,39 +1,41 @@
 package com.example.gb_plibs_hw_app.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.widget.Toast
 import com.example.gb_plibs_hw_app.databinding.ActivityMainBinding
-import com.example.gb_plibs_hw_app.presenter.MainPresenter
+import com.example.gb_plibs_hw_app.model.repository.NumListenerRepositoryImpl
+import com.example.gb_plibs_hw_app.presenter.models.CounterModel
+import com.example.gb_plibs_hw_app.presenter.usecase.ChangeNumOnButtonUseCase
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity() {
 
-    private var vb: ActivityMainBinding? = null
-    val presenter = MainPresenter(this)
+    private var _binding: ActivityMainBinding? = null
+    private val binding
+        get() = _binding!!
+
+    private val numListenerRepository by lazy { NumListenerRepositoryImpl() }
+    private val changeNumOnButtonUseCase by lazy { ChangeNumOnButtonUseCase(numListenerRepository = numListenerRepository) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(_binding?.root)
 
-        vb = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(vb?.root)
-
-        val listener = View.OnClickListener {
-            presenter.counterClick(it.id)
+        binding.mainBtn1.setOnClickListener {
+            binding.mainTextView1.text
+            var i = changeNumOnButtonUseCase.execute(param = CounterModel(binding.mainTextView1.text.toString().toInt()))
+            binding.mainTextView1.text = i.toString()
         }
 
-        vb?.btnCounter1?.setOnClickListener(listener)
-        vb?.btnCounter2?.setOnClickListener(listener)
-        vb?.btnCounter3?.setOnClickListener(listener)
-    }
-
-    //Подсказка к ПЗ: поделить на 3 отдельные функции и избавиться от index
-    override fun setButtonText(index: Int, text: String) {
-        when(index){
-            0 -> vb?.btnCounter1?.text = text
-            1 -> vb?.btnCounter2?.text = text
-            2 -> vb?.btnCounter3?.text = text
+        binding.mainBtn2.setOnClickListener {
+            binding.mainTextView2.text
+            var i = changeNumOnButtonUseCase.execute(param = CounterModel(binding.mainTextView2.text.toString().toInt()))
+            binding.mainTextView2.text = i.toString()
         }
     }
+
 }
 
 
