@@ -10,7 +10,7 @@ object AppScreens {
         UsersFragment()
     }
 
-    fun loginScreen() = FragmentScreen {
-        LoginFragment()
+    fun loginScreen(login: String) = FragmentScreen {
+        LoginFragment.newInstance(login)
     }
 }

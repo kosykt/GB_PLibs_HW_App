@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import com.example.gb_plibs_hw_app.domain.GithubUsersRepository
 import com.example.gb_plibs_hw_app.model.GithubUserModel
+import com.example.gb_plibs_hw_app.screens.AppScreens
 import com.example.gb_plibs_hw_app.ui.base.IListPresenter
 
 class UsersPresenter(
@@ -18,7 +19,11 @@ class UsersPresenter(
 
         loadData()
 
-        usersListPresenter.itemClickListener = {} // todo
+        usersListPresenter.itemClickListener = {
+            router.navigateTo(
+                AppScreens.loginScreen(usersRepository.getUsers()[it.pos].login)
+            )
+        }
     }
 
     private fun loadData() {
@@ -37,7 +42,7 @@ class UsersPresenter(
 
         val users = mutableListOf<GithubUserModel>()
 
-        override var itemClickListener = { }
+        override var itemClickListener: (UserItemView) -> Unit = { }
 
         override fun getCount() = users.size
 
