@@ -11,6 +11,6 @@ object AppScreens {
     }
 
     fun loginScreen(login: String) = FragmentScreen {
-        LoginFragment.newInstance(login)
+        LoginFragment(login = login)
     }
 }
