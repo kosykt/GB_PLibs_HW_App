@@ -1,10 +1,19 @@
 package com.example.gb_plibs_hw_app.ui.login
 
+import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
-class LoginPresenter(): MvpPresenter<LoginView>() {
+class LoginPresenter(
+    private val router: Router,
+    private val login: String
+): MvpPresenter<LoginView>() {
 
-    fun setLogin(login: String){
+    fun setLogin(){
         viewState.setLoginTo(param = login)
+    }
+
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
     }
 }
