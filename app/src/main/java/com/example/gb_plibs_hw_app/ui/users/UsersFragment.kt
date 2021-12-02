@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.domain.GithubUsersRepository
+import com.example.gb_plibs_hw_app.model.GithubUserModel
 import com.example.gb_plibs_hw_app.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.ui.users.adapter.UsersAdapter
 import moxy.MvpAppCompatFragment
@@ -22,7 +23,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         get() = _binding!!
 
     private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
+        UsersAdapter { presenter.onUserClicked(it) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -37,8 +38,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         binding.usersRecycler.adapter = adapter
     }
 
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
+    override fun updateList(users: List<GithubUserModel>) {
+        adapter.submitList(users)
     }
 
     override fun backPressed(): Boolean {
