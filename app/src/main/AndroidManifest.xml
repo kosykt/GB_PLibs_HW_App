@@ -10,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GB_PLibs_HW_App">
+
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".hw4.ui.activity.HW4Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.ui.main
+package com.example.gb_plibs_hw_app.hw4.ui.activity
 
 import com.example.gb_plibs_hw_app.App
 import com.example.gb_plibs_hw_app.R
@@ -7,11 +7,10 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
+class HW4Activity : MvpAppCompatActivity(R.layout.activity_hw4), HW4View {
 
-    private val navigator = AppNavigator(this, R.id.container)
-
-    private val presenter by moxyPresenter { MainPresenter(App.instance.router) }
+    private val navigator = AppNavigator(this, R.id.container_hw4)
+    private val presenter by moxyPresenter { HW4Presenter(App.instance.router) }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
