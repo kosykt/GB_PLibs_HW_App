@@ -34,6 +34,16 @@
                 android:layout_margin="16dp"
                 android:text="convert to PNG" />
 
+            <TextView
+                android:id="@+id/status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="success!"
+                android:layout_marginBottom="16dp"
+                android:textSize="24sp"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
             <ImageView
                 android:id="@+id/png_iv"
                 android:layout_width="wrap_content"
