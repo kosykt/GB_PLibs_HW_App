@@ -1,6 +1,8 @@
 package com.example.gb_plibs_hw_app.domain
 
 import com.example.gb_plibs_hw_app.model.GithubUserModel
+import io.reactivex.rxjava3.annotations.NonNull
+import io.reactivex.rxjava3.core.Observable
 
 class GithubUsersRepository {
 
@@ -13,7 +15,7 @@ class GithubUsersRepository {
         GithubUserModel("user6"),
     )
 
-    fun getUsers(): List<GithubUserModel> {
-        return users
+    fun getUsers(): @NonNull Observable<List<GithubUserModel>> {
+        return Observable.just(users)
     }
 }
