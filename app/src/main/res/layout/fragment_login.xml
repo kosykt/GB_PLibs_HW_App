@@ -4,16 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginFragment">
+    tools:context=".presentation.ui.login.LoginFragment"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/login_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        tools:src="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/login_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/login_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/black"
+        tools:text="Имя пользователя"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/login_image"
+        app:layout_constraintTop_toTopOf="@id/login_image"
+        app:layout_constraintBottom_toBottomOf="@id/login_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
