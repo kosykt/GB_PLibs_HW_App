@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/layout/fragment_convert_picture.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.1984375" />
+        <entry key="app/src/main/res/layout/item_user.xml" value="0.1984375" />
       </map>
     </option>
   </component>
