@@ -8,10 +8,10 @@ import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
 
-class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener {
+class DetailsFragment(private val user: String) : MvpAppCompatFragment(), DetailsView, BackButtonListener {
 
     companion object {
-
+        fun newInstance(user: String) = DetailsFragment(user = user)
     }
 
     private var _binding: FragmentDetailsBinding? = null
@@ -25,6 +25,12 @@ class DetailsFragment : MvpAppCompatFragment(), DetailsView, BackButtonListener 
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.detailTv.text = user
     }
 
     override fun onDestroyView() {

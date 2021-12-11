@@ -6,6 +6,7 @@ import moxy.MvpPresenter
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersRepository
 import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
+import com.example.gb_plibs_hw_app.presentation.AppScreens
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -40,7 +41,7 @@ class UsersPresenter(
     }
 
     fun onUserClicked(userModel: ListUserModel) {
-//        router.navigateTo(AppScreens.loginScreen(login = userModel.login))
+        router.navigateTo(AppScreens.detailsScreen(user = userModel.login))
     }
 
     fun backPressed(): Boolean {
