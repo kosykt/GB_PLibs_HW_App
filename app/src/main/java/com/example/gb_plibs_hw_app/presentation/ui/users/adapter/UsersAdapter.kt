@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gb_plibs_hw_app.databinding.ItemUserBinding
-import com.example.gb_plibs_hw_app.domain.model.GithubUserModel
+import com.example.gb_plibs_hw_app.domain.model.ListUserModel
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.ImageLoader
 
 class UsersAdapter(
-    private val itemClickListener: (GithubUserModel) -> Unit,
+    private val itemClickListener: (ListUserModel) -> Unit,
     private val imageLoader: ImageLoader<ImageView>
-) : ListAdapter<GithubUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
+) : ListAdapter<ListUserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
@@ -27,7 +27,7 @@ class UsersAdapter(
 
     inner class UserViewHolder(private val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root) {
 
-        fun showUser(user: GithubUserModel) {
+        fun showUser(user: ListUserModel) {
             vb.root.setOnClickListener { itemClickListener(user) }
 
             vb.tvLogin.text = user.login
@@ -37,13 +37,13 @@ class UsersAdapter(
     }
 }
 
-object GithubUserItemCallback : DiffUtil.ItemCallback<GithubUserModel>() {
+object GithubUserItemCallback : DiffUtil.ItemCallback<ListUserModel>() {
 
-    override fun areItemsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+    override fun areItemsTheSame(oldItem: ListUserModel, newItem: ListUserModel): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: GithubUserModel, newItem: GithubUserModel): Boolean {
+    override fun areContentsTheSame(oldItem: ListUserModel, newItem: ListUserModel): Boolean {
         return oldItem == newItem
     }
 }
