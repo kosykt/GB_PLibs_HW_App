@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.data.repository
 
-import com.example.gb_plibs_hw_app.domain.repository.GithubUsersRepository
-import com.example.gb_plibs_hw_app.domain.model.ListUserModel
+import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersRepository
+import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
 import com.example.gb_plibs_hw_app.data.nerwork.RetrofitService
 import io.reactivex.rxjava3.core.Single
 

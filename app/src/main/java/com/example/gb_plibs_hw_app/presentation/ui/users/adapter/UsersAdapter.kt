@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gb_plibs_hw_app.databinding.ItemUserBinding
-import com.example.gb_plibs_hw_app.domain.model.ListUserModel
+import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.ImageLoader
 
 class UsersAdapter(

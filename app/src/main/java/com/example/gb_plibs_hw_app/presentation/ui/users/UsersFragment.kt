@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.data.repository.GithubUsersRepositoryImpl
-import com.example.gb_plibs_hw_app.domain.model.ListUserModel
+import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.GlideImageLoader
@@ -21,8 +21,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         UsersPresenter(
-            App.instance.router,
-            GithubUsersRepositoryImpl(ApiHolder.retrofitService),
+            router = App.instance.router,
+            usersRepository = GithubUsersRepositoryImpl(ApiHolder.retrofitService),
         )
     }
     private var _binding: FragmentUsersBinding? = null
@@ -31,8 +31,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     private val adapter by lazy {
         UsersAdapter(
-            presenter::onUserClicked,
-            GlideImageLoader()
+            itemClickListener = presenter::onUserClicked,
+            imageLoader = GlideImageLoader()
         )
     }
 
@@ -50,6 +50,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
         binding.usersRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.usersRecycler.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun updateList(users: List<ListUserModel>) {
