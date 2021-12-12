@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.GetGithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
+import com.example.gb_plibs_hw_app.domain.repodetails.model.RepoModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -19,7 +22,11 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         get() = _binding!!
 
     private val presenter by moxyPresenter {
-        RepoDetailsPresenter(router = App.instance.router)
+        RepoDetailsPresenter(
+            router = App.instance.router,
+            detailsModel = detailsModel,
+            githubRepoRepository = GetGithubRepoRepositoryImpl(ApiHolder.retrofitService)
+        )
     }
 
     private val detailsModel: DetailsModel by lazy {
@@ -37,7 +44,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.repoTv.text = detailsModel.name
+
     }
 
     override fun onDestroyView() {
@@ -60,5 +67,9 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
                 arguments = bundleOf(KEY_REPO_MODEL to repo)
             }
         }
+    }
+
+    override fun showRepoDetails(repoModel: RepoModel) {
+        binding.repoTv.text = repoModel.forksCount.toString()
     }
 }
