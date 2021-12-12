@@ -1,6 +1,10 @@
 package com.example.gb_plibs_hw_app.domain.details.model
 
-class DetailsModel {
+import com.google.gson.annotations.Expose
+import java.io.Serializable
 
+data class DetailsModel(
 
-}
+    @Expose
+    val name: String
+): Serializable
