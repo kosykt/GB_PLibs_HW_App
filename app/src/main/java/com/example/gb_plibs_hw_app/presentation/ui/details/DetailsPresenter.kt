@@ -1,6 +1,7 @@
 package com.example.gb_plibs_hw_app.presentation.ui.details
 
 import android.util.Log
+import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.domain.details.repository.GithubDetailsRepository
 import com.example.gb_plibs_hw_app.domain.details.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
@@ -29,16 +30,12 @@ class DetailsPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { details ->
-                    viewState.show(details)
+                    viewState.showUserRepos(details)
                     Log.d("Retrofit", "Успех $details")
                 }, { e ->
                     Log.e("Retrofit", "Ошибка", e)
                 }
             )
-    }
-
-    fun userDetails(){
-
     }
 
     fun backPressed() {

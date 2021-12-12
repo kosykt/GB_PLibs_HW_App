@@ -70,11 +70,7 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         return true
     }
 
-    override fun showDetails() {
-        presenter.userDetails()
-    }
-
-    override fun show(repos: List<DetailsModel>) {
+    override fun showUserRepos(repos: List<DetailsModel>) {
         adapter.submitList(repos)
     }
 

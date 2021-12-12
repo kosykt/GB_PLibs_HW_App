@@ -7,8 +7,5 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 interface DetailsView: MvpView {
 
     @AddToEndSingle
-    fun showDetails()
-
-    @AddToEndSingle
-    fun show(repos: List<DetailsModel>)
+    fun showUserRepos(repos: List<DetailsModel>)
 }
