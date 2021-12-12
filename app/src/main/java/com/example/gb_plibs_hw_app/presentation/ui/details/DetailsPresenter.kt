@@ -29,6 +29,7 @@ class DetailsPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { details ->
+                    viewState.show(details)
                     Log.d("Retrofit", "Успех $details")
                 }, { e ->
                     Log.e("Retrofit", "Ошибка", e)

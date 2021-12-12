@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.data.details.network.DetailsApiHolder
 import com.example.gb_plibs_hw_app.data.details.repository.GithubDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
+import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
@@ -69,6 +70,14 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         return true
     }
 
+    override fun showDetails() {
+        presenter.userDetails()
+    }
+
+    override fun show(repos: List<DetailsModel>) {
+        adapter.submitList(repos)
+    }
+
     companion object {
 
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
@@ -78,9 +87,5 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
                 arguments = bundleOf(KEY_USER_MODEL to user)
             }
         }
-    }
-
-    override fun showDetails() {
-        presenter.userDetails()
     }
 }
