@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import com.example.gb_plibs_hw_app.data.details.network.DetailsApiHolder
+import com.example.gb_plibs_hw_app.data.details.repository.GithubDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
 import com.example.gb_plibs_hw_app.presentation.App
@@ -27,7 +29,8 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
     private val presenter by moxyPresenter {
         DetailsPresenter(
             router = App.instance.router,
-            user = userModel
+            user = userModel,
+            detailsRepository = GithubDetailsRepositoryImpl(DetailsApiHolder.retrofitService)
         )
     }
 
