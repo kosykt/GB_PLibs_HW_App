@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gb_plibs_hw_app.data.details.network.DetailsApiHolder
-import com.example.gb_plibs_hw_app.data.details.repository.GithubDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.GithubDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
 import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
@@ -32,7 +32,7 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         DetailsPresenter(
             router = App.instance.router,
             user = userModel,
-            detailsRepository = GithubDetailsRepositoryImpl(DetailsApiHolder.retrofitService)
+            detailsRepository = GithubDetailsRepositoryImpl(ApiHolder.retrofitService)
         )
     }
 

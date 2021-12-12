@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.data.users.nerwork
+package com.example.gb_plibs_hw_app.data.nerwork
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -8,11 +8,11 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
-object UsersApiHolder {
+object ApiHolder {
 
     val retrofitService by lazy {
         getRetrofit()
-            .create<UsersRetrofitService>()
+            .create<RetrofitService>()
     }
 
     private fun getGson(): Gson {
