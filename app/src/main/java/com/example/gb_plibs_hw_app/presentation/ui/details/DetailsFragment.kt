@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.data.details.network.DetailsApiHolder
 import com.example.gb_plibs_hw_app.data.details.repository.GithubDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
@@ -34,6 +35,12 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         )
     }
 
+    private val adapter by lazy {
+        DetailsAdapter(
+
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +52,9 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.detailRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.detailRecycler.adapter = adapter
+
         binding.detailTv.text = userModel.login
         GlideImageLoader().loadInto(userModel.avatarUrl, binding.detailIv)
     }
