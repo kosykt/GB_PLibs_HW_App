@@ -38,7 +38,7 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
 
     private val adapter by lazy {
         DetailsAdapter(
-
+            itemClickListener = presenter::onRepoClicked
         )
     }
 

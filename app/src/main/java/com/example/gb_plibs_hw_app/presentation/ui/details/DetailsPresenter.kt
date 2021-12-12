@@ -5,6 +5,7 @@ import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.domain.details.repository.GithubDetailsRepository
 import com.example.gb_plibs_hw_app.domain.details.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
+import com.example.gb_plibs_hw_app.presentation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -36,6 +37,10 @@ class DetailsPresenter(
                     Log.e("Retrofit", "Ошибка", e)
                 }
             )
+    }
+
+    fun onRepoClicked(){
+        router.navigateTo(AppScreens.repoDetailsScreen())
     }
 
     fun backPressed() {

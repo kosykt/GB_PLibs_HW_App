@@ -9,7 +9,7 @@ import com.example.gb_plibs_hw_app.databinding.ItemDetailsBinding
 import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 
 class DetailsAdapter(
-
+    private val itemClickListener: () -> Unit
 ) : ListAdapter<DetailsModel, DetailsAdapter.DetailsViewHolder>(GithubDetailsItemCallBack) {
 
 
@@ -26,6 +26,7 @@ class DetailsAdapter(
     inner class DetailsViewHolder(private val vb: ItemDetailsBinding) :
         RecyclerView.ViewHolder(vb.root) {
         fun showDetails(details: DetailsModel) {
+            vb.root.setOnClickListener { itemClickListener() }
             vb.itemDetailTv.text = details.name
         }
     }
