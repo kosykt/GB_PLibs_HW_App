@@ -6,5 +6,8 @@ import java.io.Serializable
 data class DetailsModel(
 
     @Expose
-    val name: String
+    val name: String,
+
+    @Expose
+    val url: String
 ): Serializable
