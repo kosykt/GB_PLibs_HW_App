@@ -1,5 +1,6 @@
 package com.example.gb_plibs_hw_app.presentation
 
+import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UserModel
 import com.example.gb_plibs_hw_app.presentation.ui.details.DetailsFragment
 import com.example.gb_plibs_hw_app.presentation.ui.repodetails.RepoDetailsFragment
@@ -16,7 +17,7 @@ object AppScreens {
         DetailsFragment.newInstance(user = userModel)
     }
 
-    fun repoDetailsScreen() = FragmentScreen{
-        RepoDetailsFragment()
+    fun repoDetailsScreen(detailsModel: DetailsModel) = FragmentScreen{
+        RepoDetailsFragment.newInstance(repo = detailsModel)
     }
 }

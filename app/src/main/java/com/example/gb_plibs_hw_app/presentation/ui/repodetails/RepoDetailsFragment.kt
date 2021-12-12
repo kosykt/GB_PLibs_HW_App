@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
+import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -20,6 +22,10 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         RepoDetailsPresenter(router = App.instance.router)
     }
 
+    private val detailsModel: DetailsModel by lazy {
+        requireArguments().getSerializable(KEY_REPO_MODEL) as DetailsModel
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,6 +37,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.repoTv.text = detailsModel.name
     }
 
     override fun onDestroyView() {
@@ -42,5 +49,16 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     override fun backPressed(): Boolean {
         presenter.backPressed()
         return true
+    }
+
+    companion object{
+
+        private const val KEY_REPO_MODEL = "KEY_REPO_MODEL"
+
+        fun newInstance(repo: DetailsModel):RepoDetailsFragment{
+            return RepoDetailsFragment().apply {
+                arguments = bundleOf(KEY_REPO_MODEL to repo)
+            }
+        }
     }
 }

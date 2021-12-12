@@ -39,8 +39,8 @@ class DetailsPresenter(
             )
     }
 
-    fun onRepoClicked(){
-        router.navigateTo(AppScreens.repoDetailsScreen())
+    fun onRepoClicked(detailsModel: DetailsModel){
+        router.navigateTo(AppScreens.repoDetailsScreen(detailsModel = detailsModel))
     }
 
     fun backPressed() {
