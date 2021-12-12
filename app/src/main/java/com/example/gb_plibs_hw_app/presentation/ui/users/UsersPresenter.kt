@@ -4,7 +4,7 @@ import android.util.Log
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersRepository
-import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
+import com.example.gb_plibs_hw_app.domain.users.model.UserModel
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
 import com.example.gb_plibs_hw_app.presentation.AppScreens
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -40,8 +40,8 @@ class UsersPresenter(
             )
     }
 
-    fun onUserClicked(userModel: ListUserModel) {
-        router.navigateTo(AppScreens.detailsScreen(user = userModel.login))
+    fun onUserClicked(userModel: UserModel) {
+        router.navigateTo(AppScreens.detailsScreen(userModel = userModel))
     }
 
     fun backPressed(): Boolean {

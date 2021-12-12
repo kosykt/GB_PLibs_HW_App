@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.data.repository.GithubUsersRepositoryImpl
-import com.example.gb_plibs_hw_app.domain.users.model.ListUserModel
+import com.example.gb_plibs_hw_app.domain.users.model.UserModel
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.GlideImageLoader
@@ -57,7 +57,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         _binding = null
     }
 
-    override fun updateList(users: List<ListUserModel>) {
+    override fun updateList(users: List<UserModel>) {
         adapter.submitList(users)
     }
 
