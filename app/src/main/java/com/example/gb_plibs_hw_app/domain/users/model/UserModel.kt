@@ -9,4 +9,7 @@ data class UserModel(
 
     @Expose
     val avatarUrl: String,
+
+    @Expose
+    val reposUrl: String
 ): Serializable

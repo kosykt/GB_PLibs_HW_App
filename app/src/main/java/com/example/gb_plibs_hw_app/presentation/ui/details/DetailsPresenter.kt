@@ -24,7 +24,7 @@ class DetailsPresenter(
     }
 
     private fun loadData() {
-        getGithubUserDetailsUseCase.execute()
+        getGithubUserDetailsUseCase.execute(user.reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

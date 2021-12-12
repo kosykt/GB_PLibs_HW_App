@@ -5,5 +5,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface GithubDetailsRepository {
 
-    fun getDetailsList(): Single<List<DetailsModel>>
+    fun getDetailsList(reposUrl: String): Single<List<DetailsModel>>
 }

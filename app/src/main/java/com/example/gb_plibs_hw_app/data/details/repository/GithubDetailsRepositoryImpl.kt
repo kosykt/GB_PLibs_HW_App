@@ -9,7 +9,7 @@ class GithubDetailsRepositoryImpl(
     private val retrofitService: DetailsRetrofitService
 ) : GithubDetailsRepository {
 
-    override fun getDetailsList(): Single<List<DetailsModel>> {
-        return retrofitService.getDetails()
+    override fun getDetailsList(reposUrl: String): Single<List<DetailsModel>> {
+        return retrofitService.getDetails(url = reposUrl)
     }
 }
