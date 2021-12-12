@@ -18,6 +18,10 @@ class DetailsPresenter(
 
     }
 
+    fun userDetails(){
+
+    }
+
     fun backPressed() {
         router.exit()
     }

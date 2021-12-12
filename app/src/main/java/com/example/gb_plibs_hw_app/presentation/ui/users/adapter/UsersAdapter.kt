@@ -16,7 +16,7 @@ class UsersAdapter(
 ) : ListAdapter<UserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return UserViewHolder(
+        return UserViewHolder(vb =
             ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }

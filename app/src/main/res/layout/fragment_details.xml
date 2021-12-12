@@ -26,4 +26,11 @@
         app:layout_constraintStart_toEndOf="@id/detail_iv"
         app:layout_constraintTop_toTopOf="@id/detail_iv" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/detail_iv"
+        app:layout_constraintTop_toBottomOf="@id/detail_iv"
+        android:layout_marginTop="8dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
