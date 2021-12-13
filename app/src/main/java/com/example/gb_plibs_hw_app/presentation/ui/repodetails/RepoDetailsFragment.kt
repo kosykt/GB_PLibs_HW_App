@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.GetGithubRepoRepositoryImpl
+import com.example.gb_plibs_hw_app.data.repository.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.repodetails.model.RepoModel
+import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -25,7 +25,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         RepoDetailsPresenter(
             router = App.instance.router,
             userDetailsModel = userDetailsModel,
-            githubRepoRepository = GetGithubRepoRepositoryImpl(ApiHolder.retrofitService)
+            githubRepoRepository = GithubRepoRepositoryImpl(ApiHolder.retrofitService)
         )
     }
 
@@ -69,7 +69,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         }
     }
 
-    override fun showRepoDetails(repoModel: RepoModel) {
-        binding.repoTv.text = repoModel.forksCount.toString()
+    override fun showRepoDetails(userRepoModel: UserRepoModel) {
+        binding.repoTv.text = userRepoModel.forksCount.toString()
     }
 }
