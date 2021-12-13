@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
-import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
+import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.github.terrakok.cicerone.Router
@@ -11,7 +11,7 @@ import moxy.MvpPresenter
 
 class RepoDetailsPresenter(
     private val router: Router,
-    private val detailsModel: DetailsModel,
+    private val userDetailsModel: UserDetailsModel,
     githubRepoRepository: GithubRepoRepository
 ): MvpPresenter<RepoDetailsView>() {
 
@@ -24,7 +24,7 @@ class RepoDetailsPresenter(
     }
 
     private fun loadData() {
-        githubRepoUseCase.execute(repoUrl = detailsModel.url)
+        githubRepoUseCase.execute(repoUrl = userDetailsModel.url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

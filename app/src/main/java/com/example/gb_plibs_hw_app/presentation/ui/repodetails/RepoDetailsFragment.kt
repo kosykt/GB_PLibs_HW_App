@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
 import com.example.gb_plibs_hw_app.data.repository.GetGithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
-import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
+import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.RepoModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
@@ -24,13 +24,13 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val presenter by moxyPresenter {
         RepoDetailsPresenter(
             router = App.instance.router,
-            detailsModel = detailsModel,
+            userDetailsModel = userDetailsModel,
             githubRepoRepository = GetGithubRepoRepositoryImpl(ApiHolder.retrofitService)
         )
     }
 
-    private val detailsModel: DetailsModel by lazy {
-        requireArguments().getSerializable(KEY_REPO_MODEL) as DetailsModel
+    private val userDetailsModel: UserDetailsModel by lazy {
+        requireArguments().getSerializable(KEY_REPO_MODEL) as UserDetailsModel
     }
 
     override fun onCreateView(
@@ -62,7 +62,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
 
         private const val KEY_REPO_MODEL = "KEY_REPO_MODEL"
 
-        fun newInstance(repo: DetailsModel):RepoDetailsFragment{
+        fun newInstance(repo: UserDetailsModel):RepoDetailsFragment{
             return RepoDetailsFragment().apply {
                 arguments = bundleOf(KEY_REPO_MODEL to repo)
             }

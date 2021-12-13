@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gb_plibs_hw_app.databinding.ItemUserBinding
-import com.example.gb_plibs_hw_app.domain.users.model.UserModel
+import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.ImageLoader
 
 class UsersAdapter(
-    private val itemClickListener: (UserModel) -> Unit,
+    private val itemClickListener: (UsersListModel) -> Unit,
     private val imageLoader: ImageLoader<ImageView>
-) : ListAdapter<UserModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
+) : ListAdapter<UsersListModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(vb =
@@ -27,23 +27,23 @@ class UsersAdapter(
 
     inner class UserViewHolder(private val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root) {
 
-        fun showUser(user: UserModel) {
-            vb.root.setOnClickListener { itemClickListener(user) }
+        fun showUser(usersList: UsersListModel) {
+            vb.root.setOnClickListener { itemClickListener(usersList) }
 
-            vb.tvLogin.text = user.login
+            vb.tvLogin.text = usersList.login
 
-            imageLoader.loadInto(user.avatarUrl, vb.userImage)
+            imageLoader.loadInto(usersList.avatarUrl, vb.userImage)
         }
     }
 }
 
-object GithubUserItemCallback : DiffUtil.ItemCallback<UserModel>() {
+object GithubUserItemCallback : DiffUtil.ItemCallback<UsersListModel>() {
 
-    override fun areItemsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+    override fun areItemsTheSame(oldItem: UsersListModel, newItem: UsersListModel): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: UserModel, newItem: UserModel): Boolean {
+    override fun areContentsTheSame(oldItem: UsersListModel, newItem: UsersListModel): Boolean {
         return oldItem == newItem
     }
 }

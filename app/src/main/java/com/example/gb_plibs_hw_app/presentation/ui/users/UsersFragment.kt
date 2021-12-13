@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
-import com.example.gb_plibs_hw_app.data.repository.GithubUsersRepositoryImpl
-import com.example.gb_plibs_hw_app.domain.users.model.UserModel
+import com.example.gb_plibs_hw_app.data.repository.GithubUsersListRepositoryImpl
+import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.GlideImageLoader
@@ -22,7 +22,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val presenter by moxyPresenter {
         UsersPresenter(
             router = App.instance.router,
-            usersRepository = GithubUsersRepositoryImpl(ApiHolder.retrofitService),
+            usersListRepository = GithubUsersListRepositoryImpl(ApiHolder.retrofitService),
         )
     }
     private var _binding: FragmentUsersBinding? = null
@@ -57,8 +57,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         _binding = null
     }
 
-    override fun updateList(users: List<UserModel>) {
-        adapter.submitList(users)
+    override fun updateList(usersLists: List<UsersListModel>) {
+        adapter.submitList(usersLists)
     }
 
     override fun showLoading() {

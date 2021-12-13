@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.presentation.ui.details
+package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,32 +7,32 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.GithubDetailsRepositoryImpl
-import com.example.gb_plibs_hw_app.databinding.FragmentDetailsBinding
-import com.example.gb_plibs_hw_app.domain.details.model.DetailsModel
-import com.example.gb_plibs_hw_app.domain.users.model.UserModel
+import com.example.gb_plibs_hw_app.data.repository.GithubUserDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.databinding.FragmentUserDetailsBinding
+import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
+import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.GlideImageLoader
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
+class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
     BackButtonListener {
 
-    private var _binding: FragmentDetailsBinding? = null
+    private var _binding: FragmentUserDetailsBinding? = null
     private val binding
         get() = _binding!!
 
-    private val userModel: UserModel by lazy {
-        requireArguments().getSerializable(KEY_USER_MODEL) as UserModel
+    private val usersListModel: UsersListModel by lazy {
+        requireArguments().getSerializable(KEY_USER_MODEL) as UsersListModel
     }
 
     private val presenter by moxyPresenter {
-        DetailsPresenter(
+        UserDetailsPresenter(
             router = App.instance.router,
-            user = userModel,
-            detailsRepository = GithubDetailsRepositoryImpl(ApiHolder.retrofitService)
+            usersList = usersListModel,
+            userDetailsRepository = GithubUserDetailsRepositoryImpl(ApiHolder.retrofitService)
         )
     }
 
@@ -47,7 +47,7 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,8 +56,8 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         binding.detailRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.detailRecycler.adapter = adapter
 
-        binding.detailTv.text = userModel.login
-        GlideImageLoader().loadInto(userModel.avatarUrl, binding.detailIv)
+        binding.detailTv.text = usersListModel.login
+        GlideImageLoader().loadInto(usersListModel.avatarUrl, binding.detailIv)
     }
 
     override fun onDestroyView() {
@@ -70,7 +70,7 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
         return true
     }
 
-    override fun showUserRepos(repos: List<DetailsModel>) {
+    override fun showUserRepos(repos: List<UserDetailsModel>) {
         adapter.submitList(repos)
     }
 
@@ -78,9 +78,9 @@ class DetailsFragment() : MvpAppCompatFragment(), DetailsView,
 
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
-        fun newInstance(user: UserModel): DetailsFragment{
-            return DetailsFragment().apply {
-                arguments = bundleOf(KEY_USER_MODEL to user)
+        fun newInstance(usersList: UsersListModel): UserDetailsFragment{
+            return UserDetailsFragment().apply {
+                arguments = bundleOf(KEY_USER_MODEL to usersList)
             }
         }
     }
