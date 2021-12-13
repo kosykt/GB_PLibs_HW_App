@@ -1,6 +1,6 @@
-package com.example.gb_plibs_hw_app.data.repository
+package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.nerwork.RetrofitService
+import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import io.reactivex.rxjava3.core.Single

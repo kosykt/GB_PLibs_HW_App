@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.GithubRepoRepositoryImpl
+import com.example.gb_plibs_hw_app.data.network.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel

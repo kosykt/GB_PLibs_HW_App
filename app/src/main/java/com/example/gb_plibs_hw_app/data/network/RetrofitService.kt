@@ -1,7 +1,7 @@
-package com.example.gb_plibs_hw_app.data.nerwork
+package com.example.gb_plibs_hw_app.data.network
 
-import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel
+import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET

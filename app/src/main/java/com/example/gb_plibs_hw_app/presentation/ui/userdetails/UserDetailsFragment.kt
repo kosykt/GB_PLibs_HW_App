@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.GithubUserDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.network.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentUserDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
