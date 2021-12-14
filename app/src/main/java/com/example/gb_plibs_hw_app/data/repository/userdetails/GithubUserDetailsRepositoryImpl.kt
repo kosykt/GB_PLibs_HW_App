@@ -15,7 +15,11 @@ class GithubUserDetailsRepositoryImpl(
             .flatMap { listNetworkModel ->
                 Single.fromCallable {
                     val returnedList = listNetworkModel.map { networkModel ->
-                        UserDetailsModel(name = networkModel.name, url = networkModel.url)
+                        UserDetailsModel(
+                            id = networkModel.id,
+                            name = networkModel.name,
+                            url = networkModel.url
+                        )
                     }
                     returnedList
                 }

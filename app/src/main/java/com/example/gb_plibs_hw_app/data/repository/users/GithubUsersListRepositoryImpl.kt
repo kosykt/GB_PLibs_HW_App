@@ -25,7 +25,7 @@ class GithubUsersListRepositoryImpl(
                             reposUrl = networkModel.reposUrl
                         )
                     }
-                    db.userDao.insert(roomUsers)
+                    db.usersDao.insert(roomUsers)
 
                     val returnedList = listNetworkModel.map { networkModel ->
                         UsersModel(
