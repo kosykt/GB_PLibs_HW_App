@@ -10,6 +10,15 @@ class GithubUserDetailsRepositoryImpl(
 ) : GithubUserDetailsRepository {
 
     override fun getDetailsList(reposUrl: String): Single<List<UserDetailsModel>> {
+
         return retrofitService.getDetails(url = reposUrl)
+            .flatMap { listUsers ->
+                Single.fromCallable {
+                    val returnedList = listUsers.map { user ->
+                        UserDetailsModel(name = user.name, url = user.url)
+                    }
+                    returnedList
+                }
+            }
     }
 }
