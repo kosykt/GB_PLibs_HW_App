@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
@@ -20,10 +21,13 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
         UsersPresenter(
             router = App.instance.router,
             usersListRepository = GithubUsersListRepositoryImpl(
+                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )
