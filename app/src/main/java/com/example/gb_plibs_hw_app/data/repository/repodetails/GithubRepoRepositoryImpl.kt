@@ -10,8 +10,8 @@ class GithubRepoRepositoryImpl(
 ) : GithubRepoRepository {
 
     override fun getRepoDetails(repoUrl: String): Single<UserRepoModel> {
-        return retrofitService.getRepo(url = repoUrl).map { networkUserRepo ->
-            UserRepoModel(forksCount = networkUserRepo.forksCount)
+        return retrofitService.getRepo(url = repoUrl).map { networkModel ->
+            UserRepoModel(forksCount = networkModel.forksCount)
         }
     }
 }

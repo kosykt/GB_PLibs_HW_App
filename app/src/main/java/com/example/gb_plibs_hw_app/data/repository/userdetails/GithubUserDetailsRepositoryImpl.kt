@@ -12,10 +12,10 @@ class GithubUserDetailsRepositoryImpl(
     override fun getDetailsList(reposUrl: String): Single<List<UserDetailsModel>> {
 
         return retrofitService.getDetails(url = reposUrl)
-            .flatMap { listUsers ->
+            .flatMap { listNetworkModel ->
                 Single.fromCallable {
-                    val returnedList = listUsers.map { user ->
-                        UserDetailsModel(name = user.name, url = user.url)
+                    val returnedList = listNetworkModel.map { networkModel ->
+                        UserDetailsModel(name = networkModel.name, url = networkModel.url)
                     }
                     returnedList
                 }

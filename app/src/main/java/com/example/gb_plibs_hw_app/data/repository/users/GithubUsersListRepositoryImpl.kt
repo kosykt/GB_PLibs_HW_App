@@ -10,6 +10,19 @@ class GithubUsersListRepositoryImpl(
 ) : GithubUsersListRepository {
 
     override fun getUsersList(): Single<List<UsersModel>> {
+
         return retrofitService.getUsers()
+            .flatMap { listNetworkModel ->
+                Single.fromCallable {
+                    val returnedList = listNetworkModel.map { networkModel ->
+                        UsersModel(
+                            login = networkModel.login,
+                            avatarUrl = networkModel.avatarUrl,
+                            reposUrl = networkModel.reposUrl
+                        )
+                    }
+                    returnedList
+                }
+            }
     }
 }
