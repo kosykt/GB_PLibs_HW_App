@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.network.ApiHolder
 import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentUserDetailsBinding
@@ -32,7 +33,10 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
         UserDetailsPresenter(
             router = App.instance.router,
             usersModel = usersListModel,
-            userDetailsRepository = GithubUserDetailsRepositoryImpl(ApiHolder.retrofitService)
+            userDetailsRepository = GithubUserDetailsRepositoryImpl(
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance
+            )
         )
     }
 
@@ -78,7 +82,7 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
 
         private const val KEY_USER_MODEL = "KEY_USER_MODEL"
 
-        fun newInstance(usersModel: UsersModel): UserDetailsFragment{
+        fun newInstance(usersModel: UsersModel): UserDetailsFragment {
             return UserDetailsFragment().apply {
                 arguments = bundleOf(KEY_USER_MODEL to usersModel)
             }

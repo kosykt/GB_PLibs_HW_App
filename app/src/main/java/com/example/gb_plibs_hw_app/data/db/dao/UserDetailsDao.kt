@@ -12,6 +12,9 @@ interface UserDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(id: RoomUserDetailsModel)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(id: List<RoomUserDetailsModel>)
+
     @Query("SELECT * FROM RoomUserDetailsModel")
     fun getAll(): List<RoomUserDetailsModel>
 }
