@@ -14,7 +14,8 @@ import com.example.gb_plibs_hw_app.presentation.App
         RoomUsersModel::class,
         RoomUserDetailsModel::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -26,7 +27,6 @@ abstract class AppDatabase : RoomDatabase() {
 
         val instance by lazy {
             Room.databaseBuilder(App.instance, AppDatabase::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
                 .build()
         }
     }
