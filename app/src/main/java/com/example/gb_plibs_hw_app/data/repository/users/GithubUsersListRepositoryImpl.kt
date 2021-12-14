@@ -16,6 +16,7 @@ class GithubUsersListRepositoryImpl(
                 Single.fromCallable {
                     val returnedList = listNetworkModel.map { networkModel ->
                         UsersModel(
+                            id =networkModel.id,
                             login = networkModel.login,
                             avatarUrl = networkModel.avatarUrl,
                             reposUrl = networkModel.reposUrl

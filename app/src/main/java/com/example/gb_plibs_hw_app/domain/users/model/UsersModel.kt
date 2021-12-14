@@ -4,6 +4,7 @@ import java.io.Serializable
 
 data class UsersModel(
 
+    val id: String,
     val login: String,
     val avatarUrl: String,
     val reposUrl: String
