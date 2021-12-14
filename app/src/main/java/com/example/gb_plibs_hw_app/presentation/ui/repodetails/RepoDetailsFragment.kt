@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.network.ApiHolder
 import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
@@ -25,7 +26,10 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         RepoDetailsPresenter(
             router = App.instance.router,
             userDetailsModel = userDetailsModel,
-            githubRepoRepository = GithubRepoRepositoryImpl(ApiHolder.retrofitService)
+            githubRepoRepository = GithubRepoRepositoryImpl(
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance
+            )
         )
     }
 
@@ -58,11 +62,11 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         return true
     }
 
-    companion object{
+    companion object {
 
         private const val KEY_REPO_MODEL = "KEY_REPO_MODEL"
 
-        fun newInstance(repo: UserDetailsModel):RepoDetailsFragment{
+        fun newInstance(repo: UserDetailsModel): RepoDetailsFragment {
             return RepoDetailsFragment().apply {
                 arguments = bundleOf(KEY_REPO_MODEL to repo)
             }
