@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
@@ -22,7 +23,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val presenter by moxyPresenter {
         UsersPresenter(
             router = App.instance.router,
-            usersListRepository = GithubUsersListRepositoryImpl(ApiHolder.retrofitService),
+            usersListRepository = GithubUsersListRepositoryImpl(
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance
+            )
         )
     }
     private var _binding: FragmentUsersBinding? = null
