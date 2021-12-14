@@ -14,7 +14,7 @@ class GithubRepoRepositoryImpl(
     private val db: AppDatabase
 ) : GithubRepoRepository {
 
-    override fun getRepoDetails(repoUrl: String): Single<UserRepoModel> {
+    override fun getRepoDetails(repoUrl: String, repoId: String): Single<UserRepoModel> {
 
         return if (networkStatus.isOnline()) {
             retrofitService.getRepo(url = repoUrl).map { networkModel ->
@@ -29,8 +29,8 @@ class GithubRepoRepositoryImpl(
         } else {
             Single.fromCallable {
                 UserRepoModel(
-                    id = db.repoDetailsDao.getAll().id,
-                    forksCount = db.repoDetailsDao.getAll().forksCount
+                    id = db.repoDetailsDao.getRepoId(repoId).id,
+                    forksCount = db.repoDetailsDao.getRepoId(repoId).forksCount
                 )
             }
         }
