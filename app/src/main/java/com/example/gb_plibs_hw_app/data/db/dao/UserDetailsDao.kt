@@ -17,4 +17,7 @@ interface UserDetailsDao {
 
     @Query("SELECT * FROM RoomUserDetailsModel")
     fun getAll(): List<RoomUserDetailsModel>
+
+    @Query("SELECT * FROM RoomUserDetailsModel WHERE userId = :userId")
+    fun getByUserId(userId: String): List<RoomUserDetailsModel>
 }

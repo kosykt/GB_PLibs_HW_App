@@ -14,7 +14,7 @@ class GithubUserDetailsRepositoryImpl(
     private val db: AppDatabase
 ) : GithubUserDetailsRepository {
 
-    override fun getDetailsList(reposUrl: String): Single<List<UserDetailsModel>> {
+    override fun getDetailsList(reposUrl: String, userId: String): Single<List<UserDetailsModel>> {
 
         return if (networkStatus.isOnline()) {
             retrofitService.getDetails(url = reposUrl)
@@ -43,7 +43,7 @@ class GithubUserDetailsRepositoryImpl(
                 }
         } else {
             Single.fromCallable {
-                db.userDetailsDao.getAll().map { networkModel ->
+                db.userDetailsDao.getByUserId(userId = userId).map { networkModel ->
                     UserDetailsModel(
                         id = networkModel.id,
                         name = networkModel.name,

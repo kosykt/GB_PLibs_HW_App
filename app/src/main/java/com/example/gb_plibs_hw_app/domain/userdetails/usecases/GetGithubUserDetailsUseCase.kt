@@ -6,5 +6,6 @@ import io.reactivex.rxjava3.core.Single
 
 class GetGithubUserDetailsUseCase(private val userDetailsRepository: GithubUserDetailsRepository) {
 
-    fun execute(userReposUrl: String): Single<List<UserDetailsModel>> = userDetailsRepository.getDetailsList(userReposUrl)
+    fun execute(userReposUrl: String, userId: String): Single<List<UserDetailsModel>> =
+        userDetailsRepository.getDetailsList(reposUrl = userReposUrl, userId = userId)
 }

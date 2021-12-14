@@ -15,7 +15,7 @@ class UserDetailsPresenter(
     private val router: Router,
     private val usersModel: UsersModel,
     userDetailsRepository: GithubUserDetailsRepository
-): MvpPresenter<UserDetailsView>() {
+) : MvpPresenter<UserDetailsView>() {
 
     private val getGithubUserDetailsUseCase =
         GetGithubUserDetailsUseCase(userDetailsRepository = userDetailsRepository)
@@ -26,7 +26,10 @@ class UserDetailsPresenter(
     }
 
     private fun loadData() {
-        getGithubUserDetailsUseCase.execute(usersModel.reposUrl)
+        getGithubUserDetailsUseCase.execute(
+            userReposUrl = usersModel.reposUrl,
+            userId = usersModel.id
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -39,7 +42,7 @@ class UserDetailsPresenter(
             )
     }
 
-    fun onRepoClicked(userDetailsModel: UserDetailsModel){
+    fun onRepoClicked(userDetailsModel: UserDetailsModel) {
         router.navigateTo(AppScreens.repoDetailsScreen(userDetailsModel = userDetailsModel))
     }
 
