@@ -24,7 +24,8 @@ class GithubUserDetailsRepositoryImpl(
                             RoomUserDetailsModel(
                                 id = networkModel.id,
                                 name = networkModel.name,
-                                url = networkModel.url
+                                url = networkModel.url,
+                                userId = networkModel.owner.id
                             )
                         }
                         db.userDetailsDao.insert(roomUserDetails)
@@ -33,7 +34,8 @@ class GithubUserDetailsRepositoryImpl(
                             UserDetailsModel(
                                 id = networkModel.id,
                                 name = networkModel.name,
-                                url = networkModel.url
+                                url = networkModel.url,
+                                userId = networkModel.owner.id
                             )
                         }
                         returnedList
@@ -45,7 +47,8 @@ class GithubUserDetailsRepositoryImpl(
                     UserDetailsModel(
                         id = networkModel.id,
                         name = networkModel.name,
-                        url = networkModel.url
+                        url = networkModel.url,
+                        userId = networkModel.userId
                     )
                 }
             }

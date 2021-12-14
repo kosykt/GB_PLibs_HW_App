@@ -11,5 +11,13 @@ data class NetworkUserDetailsModel(
     val name: String,
 
     @Expose
-    val url: String
+    val url: String,
+
+    @Expose
+    val owner: NetworkUserOwner,
+)
+
+data class NetworkUserOwner(
+    @Expose
+    val id: String,
 )

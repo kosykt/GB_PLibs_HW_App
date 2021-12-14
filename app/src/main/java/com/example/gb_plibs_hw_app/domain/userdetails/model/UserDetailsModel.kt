@@ -6,5 +6,6 @@ data class UserDetailsModel(
 
     val id: String,
     val name: String,
-    val url: String
+    val url: String,
+    val userId: String
 ) : Serializable
