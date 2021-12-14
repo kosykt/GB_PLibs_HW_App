@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.network.ApiHolder
 import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
@@ -22,11 +23,14 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
         RepoDetailsPresenter(
             router = App.instance.router,
             userDetailsModel = userDetailsModel,
             githubRepoRepository = GithubRepoRepositoryImpl(
+                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )

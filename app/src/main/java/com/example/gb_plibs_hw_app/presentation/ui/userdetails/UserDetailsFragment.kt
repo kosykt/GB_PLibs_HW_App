@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.network.ApiHolder
 import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentUserDetailsBinding
@@ -29,11 +30,14 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
         requireArguments().getSerializable(KEY_USER_MODEL) as UsersModel
     }
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
         UserDetailsPresenter(
             router = App.instance.router,
             usersModel = usersListModel,
             userDetailsRepository = GithubUserDetailsRepositoryImpl(
+                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )
