@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.data.repository.users
 
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.db.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.db.model.RoomUsersModel
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel

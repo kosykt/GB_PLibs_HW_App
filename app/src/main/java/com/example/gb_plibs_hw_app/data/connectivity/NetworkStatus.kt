@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.data.db.connectivity
+package com.example.gb_plibs_hw_app.data.connectivity
 
 import android.content.Context
 import android.net.ConnectivityManager

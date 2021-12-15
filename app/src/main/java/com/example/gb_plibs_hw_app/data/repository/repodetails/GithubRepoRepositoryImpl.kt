@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.data.repository.repodetails
 
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.db.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserRepoModel
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel

@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.data.repository.userdetails
+package com.example.gb_plibs_hw_app.data.network.model
 
 import com.google.gson.annotations.Expose
 
