@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
-import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
+import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
 import com.github.terrakok.cicerone.Router
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
