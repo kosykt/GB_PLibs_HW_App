@@ -63,7 +63,6 @@ class UseCaseModule {
         return GithubUserDetailsRepositoryImpl(networkStatus, retrofitService, db)
     }
 
-
     @Singleton
     @Provides
     fun githubRepoRepository(
