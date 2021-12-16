@@ -23,36 +23,23 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
-    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
-
-    private val presenter by moxyPresenter {
-        RepoDetailsPresenter(
-            router = App.instance.router,
-            userDetailsModel = userDetailsModel,
-            githubRepoRepository = GithubRepoRepositoryImpl(
-                networkStatus = status,
-                retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance
-            )
-        )
-    }
-
     private val userDetailsModel: UserDetailsModel by lazy {
         requireArguments().getSerializable(KEY_REPO_MODEL) as UserDetailsModel
+    }
+
+    private val presenter by moxyPresenter {
+        RepoDetailsPresenter(userDetailsModel).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRepoDetailsBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     override fun onDestroyView() {

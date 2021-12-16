@@ -6,17 +6,22 @@ import moxy.MvpPresenter
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
+import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class UsersPresenter(
-    private val router: Router,
-    usersListRepository: GithubUsersListRepository
-) : MvpPresenter<UsersView>() {
+class UsersPresenter() : MvpPresenter<UsersView>() {
 
-    private val getGithubUsersListUseCase =
-        GetGithubUsersListUseCase(usersListRepository = usersListRepository)
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var appScreensRepository: AppScreensRepository
+
+    @Inject
+    lateinit var getGithubUsersListUseCase: GetGithubUsersListUseCase
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -41,7 +46,7 @@ class UsersPresenter(
     }
 
     fun onUserClicked(usersModel: UsersModel) {
-        router.navigateTo(AppScreensRepositoryImpl.userDetailsScreen(usersModel = usersModel))
+        router.navigateTo(appScreensRepository.userDetailsScreen(usersModel = usersModel))
     }
 
     fun backPressed(): Boolean {
