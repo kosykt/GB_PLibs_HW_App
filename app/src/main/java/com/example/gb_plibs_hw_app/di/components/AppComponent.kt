@@ -7,7 +7,9 @@ import com.example.gb_plibs_hw_app.presentation.ui.repodetails.RepoDetailsPresen
 import com.example.gb_plibs_hw_app.presentation.ui.userdetails.UserDetailsPresenter
 import com.example.gb_plibs_hw_app.presentation.ui.users.UsersPresenter
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
         CacheModule::class,

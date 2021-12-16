@@ -14,10 +14,12 @@ import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListReposi
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class UseCaseModule {
 
+    @Singleton
     @Provides
     fun getGithubUsersListUseCase(
         githubUsersListRepository: GithubUsersListRepository
@@ -25,6 +27,7 @@ class UseCaseModule {
         return GetGithubUsersListUseCase(githubUsersListRepository)
     }
 
+    @Singleton
     @Provides
     fun getGithubUserDetailsUseCase(
         githubUserDetailsRepository: GithubUserDetailsRepository
@@ -32,6 +35,7 @@ class UseCaseModule {
         return GetGithubUserDetailsUseCase(githubUserDetailsRepository)
     }
 
+    @Singleton
     @Provides
     fun getGithubRepoUseCase(
         githubRepoRepository: GithubRepoRepository
@@ -39,6 +43,7 @@ class UseCaseModule {
         return GetGithubRepoUseCase(githubRepoRepository)
     }
 
+    @Singleton
     @Provides
     fun githubUsersListRepository(
         networkStatus: NetworkStatus,
@@ -48,6 +53,7 @@ class UseCaseModule {
         return GithubUsersListRepositoryImpl(networkStatus, retrofitService, db)
     }
 
+    @Singleton
     @Provides
     fun githubUserDetailsRepository(
         networkStatus: NetworkStatus,
@@ -57,6 +63,7 @@ class UseCaseModule {
         return GithubUserDetailsRepositoryImpl(networkStatus, retrofitService, db)
     }
 
+    @Singleton
     @Provides
     fun githubRepoRepository(
         networkStatus: NetworkStatus,
