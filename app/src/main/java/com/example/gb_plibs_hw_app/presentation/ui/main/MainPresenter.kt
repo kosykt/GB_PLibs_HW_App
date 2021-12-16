@@ -2,7 +2,7 @@ package com.example.gb_plibs_hw_app.presentation.ui.main
 
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
-import com.example.gb_plibs_hw_app.presentation.AppScreens
+import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
 
 class MainPresenter(
     private val router: Router
@@ -11,7 +11,7 @@ class MainPresenter(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        router.replaceScreen(AppScreens.usersScreen())
+        router.replaceScreen(AppScreensRepositoryImpl.usersScreen())
     }
 
     fun backPressed() {

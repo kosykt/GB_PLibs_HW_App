@@ -5,7 +5,7 @@ import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
-import com.example.gb_plibs_hw_app.presentation.AppScreens
+import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -43,7 +43,7 @@ class UserDetailsPresenter(
     }
 
     fun onRepoClicked(userDetailsModel: UserDetailsModel) {
-        router.navigateTo(AppScreens.repoDetailsScreen(userDetailsModel = userDetailsModel))
+        router.navigateTo(AppScreensRepositoryImpl.repoDetailsScreen(userDetailsModel = userDetailsModel))
     }
 
     fun backPressed() {
