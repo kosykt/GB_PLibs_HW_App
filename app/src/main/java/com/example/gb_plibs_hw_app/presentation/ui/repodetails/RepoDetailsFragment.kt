@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel
+import com.example.gb_plibs_hw_app.domain.repodetails.model.DomainUserRepoModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -58,7 +58,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         }
     }
 
-    override fun showRepoDetails(userRepoModel: UserRepoModel) {
-        binding.repoTv.text = userRepoModel.forksCount.toString()
+    override fun showRepoDetails(domainUserRepoModel: DomainUserRepoModel) {
+        binding.repoTv.text = domainUserRepoModel.forksCount.toString()
     }
 }
