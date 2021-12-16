@@ -23,7 +23,7 @@ class RepoDetailsPresenter @AssistedInject constructor(
     }
 
     private fun loadData() {
-        githubRepoUseCase.execute(repoUrl = userDetailsModel.url, repoId = userDetailsModel.id)
+        githubRepoUseCase.execute(repoUrl = userDetailsModel.url)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
