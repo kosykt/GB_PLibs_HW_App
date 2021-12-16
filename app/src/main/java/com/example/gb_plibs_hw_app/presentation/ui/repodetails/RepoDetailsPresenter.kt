@@ -1,20 +1,21 @@
 package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
-import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
+import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class RepoDetailsPresenter @Inject constructor(
+class RepoDetailsPresenter @AssistedInject constructor(
     private val router: Router,
     private val githubRepoUseCase: GetGithubRepoUseCase,
+    @Assisted private val userDetailsModel: UserDetailsModel
 ) : MvpPresenter<RepoDetailsView>() {
-
-    lateinit var userDetailsModelP: UserDetailsModel
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -22,7 +23,7 @@ class RepoDetailsPresenter @Inject constructor(
     }
 
     private fun loadData() {
-        githubRepoUseCase.execute(repoUrl = userDetailsModelP.url, repoId = userDetailsModelP.id)
+        githubRepoUseCase.execute(repoUrl = userDetailsModel.url, repoId = userDetailsModel.id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -39,4 +40,9 @@ class RepoDetailsPresenter @Inject constructor(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface RepoDetailsPresenterFactory {
+    fun presenter(userDetailsModel: UserDetailsModel): RepoDetailsPresenter
 }

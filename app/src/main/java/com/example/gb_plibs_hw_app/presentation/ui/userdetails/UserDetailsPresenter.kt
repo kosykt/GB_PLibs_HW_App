@@ -6,18 +6,19 @@ import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDeta
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class UserDetailsPresenter @Inject constructor(
+class UserDetailsPresenter @AssistedInject constructor(
     private val router: Router,
     private val appScreensRepository: AppScreensRepository,
-    private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase
+    private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase,
+    @Assisted private val usersModel: UsersModel
 ) : MvpPresenter<UserDetailsView>() {
-
-    lateinit var usersModelP: UsersModel
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -26,8 +27,8 @@ class UserDetailsPresenter @Inject constructor(
 
     private fun loadData() {
         getGithubUserDetailsUseCase.execute(
-            userReposUrl = usersModelP.reposUrl,
-            userId = usersModelP.id
+            userReposUrl = usersModel.reposUrl,
+            userId = usersModel.id
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -48,4 +49,9 @@ class UserDetailsPresenter @Inject constructor(
     fun backPressed() {
         router.exit()
     }
+}
+
+@AssistedFactory
+interface UserDetailsPresenterFactory {
+    fun presenter(usersModel: UsersModel): UserDetailsPresenter
 }

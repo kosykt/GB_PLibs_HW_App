@@ -22,14 +22,12 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
     private val binding
         get() = _binding!!
 
-    private val usersModelF: UsersModel by lazy {
+    private val usersModel: UsersModel by lazy {
         requireArguments().getSerializable(KEY_USER_MODEL) as UsersModel
     }
 
     private val presenter by moxyPresenter {
-            App.instance.appComponent.userDetailsPresenter().apply {
-                usersModelP = this@UserDetailsFragment.usersModelF
-            }
+            App.instance.appComponent.userDetailsPresenterFactory().presenter(usersModel)
     }
 
     private val adapter by lazy {
@@ -52,8 +50,8 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
         binding.detailRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.detailRecycler.adapter = adapter
 
-        binding.detailTv.text = usersModelF.login
-        GlideImageLoader().loadInto(usersModelF.avatarUrl, binding.detailIv)
+        binding.detailTv.text = usersModel.login
+        GlideImageLoader().loadInto(usersModel.avatarUrl, binding.detailIv)
     }
 
     override fun onDestroyView() {

@@ -19,14 +19,12 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
-    private val userDetailsModelF: UserDetailsModel by lazy {
+    private val userDetailsModel: UserDetailsModel by lazy {
         requireArguments().getSerializable(KEY_REPO_MODEL) as UserDetailsModel
     }
 
     private val presenter by moxyPresenter {
-            App.instance.appComponent.repoDetailsPresenter().apply {
-                userDetailsModelP = this@RepoDetailsFragment.userDetailsModelF
-            }
+            App.instance.appComponent.repoDetailsPresenterFactory().presenter(userDetailsModel)
     }
 
     override fun onCreateView(
