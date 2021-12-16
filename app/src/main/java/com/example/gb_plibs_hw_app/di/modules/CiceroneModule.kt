@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di
+package com.example.gb_plibs_hw_app.di.modules
 
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl

@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.data.network.model
+package com.example.gb_plibs_hw_app.di.modules
 
 import android.content.Context
 import androidx.room.Room

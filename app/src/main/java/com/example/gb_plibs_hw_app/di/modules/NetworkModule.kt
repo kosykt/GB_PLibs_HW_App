@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di
+package com.example.gb_plibs_hw_app.di.modules
 
 import android.content.Context
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus

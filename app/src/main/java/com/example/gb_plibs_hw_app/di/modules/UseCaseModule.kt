@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di
+package com.example.gb_plibs_hw_app.di.modules
 
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
@@ -7,13 +7,37 @@ import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoReposit
 import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
+import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
+import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
+import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
 import dagger.Module
 import dagger.Provides
 
 @Module
-class RepositoryModule {
+class UseCaseModule {
+
+    @Provides
+    fun getGithubUsersListUseCase(
+        githubUsersListRepository: GithubUsersListRepository
+    ): GetGithubUsersListUseCase {
+        return GetGithubUsersListUseCase(githubUsersListRepository)
+    }
+
+    @Provides
+    fun getGithubUserDetailsUseCase(
+        githubUserDetailsRepository: GithubUserDetailsRepository
+    ): GetGithubUserDetailsUseCase {
+        return GetGithubUserDetailsUseCase(githubUserDetailsRepository)
+    }
+
+    @Provides
+    fun getGithubRepoUseCase(
+        githubRepoRepository: GithubRepoRepository
+    ): GetGithubRepoUseCase {
+        return GetGithubRepoUseCase(githubRepoRepository)
+    }
 
     @Provides
     fun githubUsersListRepository(
