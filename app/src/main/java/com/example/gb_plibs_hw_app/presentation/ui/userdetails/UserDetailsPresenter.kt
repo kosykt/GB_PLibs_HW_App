@@ -2,29 +2,22 @@ package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 
 import android.util.Log
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
-import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class UserDetailsPresenter(
-    private val usersModel: UsersModel
+class UserDetailsPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreensRepository: AppScreensRepository,
+    private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase
 ) : MvpPresenter<UserDetailsView>() {
 
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var appScreensRepository: AppScreensRepository
-
-    @Inject
-    lateinit var getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase
+    lateinit var usersModelP: UsersModel
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -33,8 +26,8 @@ class UserDetailsPresenter(
 
     private fun loadData() {
         getGithubUserDetailsUseCase.execute(
-            userReposUrl = usersModel.reposUrl,
-            userId = usersModel.id
+            userReposUrl = usersModelP.reposUrl,
+            userId = usersModelP.id
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

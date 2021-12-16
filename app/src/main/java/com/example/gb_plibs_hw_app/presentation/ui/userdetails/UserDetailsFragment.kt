@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
-import com.example.gb_plibs_hw_app.data.network.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentUserDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
@@ -26,14 +22,14 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
     private val binding
         get() = _binding!!
 
-    private val usersListModel: UsersModel by lazy {
+    private val usersModelF: UsersModel by lazy {
         requireArguments().getSerializable(KEY_USER_MODEL) as UsersModel
     }
 
     private val presenter by moxyPresenter {
-        UserDetailsPresenter(usersListModel).apply {
-            App.instance.appComponent.inject(this)
-        }
+            App.instance.appComponent.userDetailsPresenter().apply {
+                usersModelP = this@UserDetailsFragment.usersModelF
+            }
     }
 
     private val adapter by lazy {
@@ -56,8 +52,8 @@ class UserDetailsFragment() : MvpAppCompatFragment(), UserDetailsView,
         binding.detailRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.detailRecycler.adapter = adapter
 
-        binding.detailTv.text = usersListModel.login
-        GlideImageLoader().loadInto(usersListModel.avatarUrl, binding.detailIv)
+        binding.detailTv.text = usersModelF.login
+        GlideImageLoader().loadInto(usersModelF.avatarUrl, binding.detailIv)
     }
 
     override fun onDestroyView() {

@@ -5,10 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
-import com.example.gb_plibs_hw_app.data.network.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel
@@ -23,14 +19,14 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
-    private val userDetailsModel: UserDetailsModel by lazy {
+    private val userDetailsModelF: UserDetailsModel by lazy {
         requireArguments().getSerializable(KEY_REPO_MODEL) as UserDetailsModel
     }
 
     private val presenter by moxyPresenter {
-        RepoDetailsPresenter(userDetailsModel).apply {
-            App.instance.appComponent.inject(this)
-        }
+            App.instance.appComponent.repoDetailsPresenter().apply {
+                userDetailsModelP = this@RepoDetailsFragment.userDetailsModelF
+            }
     }
 
     override fun onCreateView(

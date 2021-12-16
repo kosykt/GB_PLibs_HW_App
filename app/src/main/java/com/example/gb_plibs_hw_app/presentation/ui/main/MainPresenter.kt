@@ -7,12 +7,10 @@ import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
 import com.github.terrakok.cicerone.androidx.AppScreen
 import javax.inject.Inject
 
-class MainPresenter() : MvpPresenter<MainView>() {
-
-    @Inject
-    lateinit var router: Router
-    @Inject
-    lateinit var appScreens: AppScreensRepository
+class MainPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreens: AppScreensRepository,
+) : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

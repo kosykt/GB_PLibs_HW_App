@@ -12,16 +12,11 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class UsersPresenter() : MvpPresenter<UsersView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var appScreensRepository: AppScreensRepository
-
-    @Inject
-    lateinit var getGithubUsersListUseCase: GetGithubUsersListUseCase
+class UsersPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreensRepository: AppScreensRepository,
+    private val getGithubUsersListUseCase: GetGithubUsersListUseCase
+) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
