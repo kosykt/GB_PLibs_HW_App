@@ -17,20 +17,18 @@ class GithubUserDetailsRepositoryImpl(
 ) : GithubUserDetailsRepository {
 
     override fun getDetailsList(
-        reposUrl: String,
-        userId: String
+        reposUrl: String, userId: String
     ): Single<List<DomainUserDetailsModel>> {
 
-        return if (networkStatus.isOnline()) {
-            retrofitService.getDetails(url = reposUrl)
+        return when (networkStatus.isOnline()) {
+            true -> retrofitService.getDetails(url = reposUrl)
                 .doOnSuccess {
                     db.userDetailsDao.insert(it.networkToRoomUserDetailsModel())
                 }
                 .map {
                     it.networkToDomainUserDetailsModel()
                 }
-        } else {
-            Single.fromCallable {
+            false -> Single.fromCallable {
                 db.userDetailsDao.getByUserId(userId = userId).roomToDomainUserDetailsModel()
             }
         }

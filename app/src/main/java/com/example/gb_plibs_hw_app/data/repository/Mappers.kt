@@ -11,7 +11,9 @@ import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsMod
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 
 fun NetworkUserRepoModel.toDomainUserRepoModel() = DomainUserRepoModel(this.id, this.forksCount)
+
 fun RoomUserRepoModel.toDomainUserRepoModel() = DomainUserRepoModel(this.id, this.forksCount)
+
 fun NetworkUserRepoModel.toRoomUserRepoModel() = RoomUserRepoModel(this.id, this.forksCount)
 
 fun NetworkUserDetailsModel.networkToDomainUserDetailsModel() =

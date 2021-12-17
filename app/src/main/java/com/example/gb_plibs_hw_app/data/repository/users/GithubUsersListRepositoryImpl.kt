@@ -17,16 +17,15 @@ class GithubUsersListRepositoryImpl(
 ) : GithubUsersListRepository {
 
     override fun getUsersList(): Single<List<DomainUsersModel>> {
-        return if (networkStatus.isOnline()) {
-            retrofitService.getUsers()
+        return when (networkStatus.isOnline()) {
+            true -> retrofitService.getUsers()
                 .doOnSuccess {
                     db.usersDao.insert(it.networkToRoomUsersModel())
                 }
                 .map {
                     it.networkToDomainUsersModel()
                 }
-        } else {
-            Single.fromCallable {
+            false -> Single.fromCallable {
                 db.usersDao.getAll().roomToDomainUsersModel()
             }
         }
