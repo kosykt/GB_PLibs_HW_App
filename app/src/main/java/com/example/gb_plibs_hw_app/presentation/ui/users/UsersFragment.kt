@@ -6,10 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.network.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.presentation.App
@@ -21,17 +17,10 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val networkStatus by lazy { NetworkStatus(requireContext().applicationContext) }
-
     private val presenter by moxyPresenter {
-        UsersPresenter(
-            router = App.instance.router,
-            networkStatus = networkStatus,
-            usersListRepository = GithubUsersListRepositoryImpl(
-                retrofitService = ApiHolder.retrofitService,
-                db = AppDatabase.instance
-            ), appScreensRepository = TODO()
-        )
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
     }
     private var _binding: FragmentUsersBinding? = null
     private val binding

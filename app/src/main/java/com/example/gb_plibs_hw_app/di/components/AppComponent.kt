@@ -16,8 +16,8 @@ import dagger.Component
 
 @Component(
     modules = [
-        ContextModule::class,
         CiceroneModule::class,
+        ContextModule::class,
         UserDetailsUseCaseModule::class,
         UserRepoUseCaseModule::class,
         UsersUseCaseModule::class,

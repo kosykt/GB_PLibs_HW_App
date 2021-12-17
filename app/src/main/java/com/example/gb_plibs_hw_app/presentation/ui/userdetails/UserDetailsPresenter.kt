@@ -3,7 +3,6 @@ package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 import android.util.Log
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
-import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
@@ -11,17 +10,23 @@ import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class UserDetailsPresenter(
-    private val router: Router,
-    private val domainUsersModel: DomainUsersModel,
-    private val networkStatus: NetworkStatus,
-    private val appScreensRepository: AppScreensRepository,
-    userDetailsRepository: GithubUserDetailsRepository
+    private val domainUsersModel: DomainUsersModel
 ) : MvpPresenter<UserDetailsView>() {
 
-    private val getGithubUserDetailsUseCase =
-        GetGithubUserDetailsUseCase(userDetailsRepository = userDetailsRepository)
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var appScreensRepository: AppScreensRepository
+
+    @Inject
+    lateinit var networkStatus: NetworkStatus
+
+    @Inject
+    lateinit var getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

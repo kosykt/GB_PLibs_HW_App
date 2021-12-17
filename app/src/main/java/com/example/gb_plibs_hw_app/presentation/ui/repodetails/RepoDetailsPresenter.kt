@@ -2,23 +2,26 @@ package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
-import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class RepoDetailsPresenter(
-    private val router: Router,
     private val domainUserDetailsModel: DomainUserDetailsModel,
-    private val networkStatus: NetworkStatus,
-    githubRepoRepository: GithubRepoRepository
 ) : MvpPresenter<RepoDetailsView>() {
 
-    private val githubRepoUseCase =
-        GetGithubRepoUseCase(repoRepository = githubRepoRepository)
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var githubRepoUseCase: GetGithubRepoUseCase
+
+    @Inject
+    lateinit var networkStatus: NetworkStatus
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

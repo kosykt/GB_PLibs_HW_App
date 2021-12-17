@@ -24,7 +24,7 @@ class CiceroneModule {
     }
 
     @Provides
-    fun appScreensRepository(): AppScreensRepository {
+    fun appScreens(): AppScreensRepository {
         return AppScreensRepositoryImpl()
     }
 }
