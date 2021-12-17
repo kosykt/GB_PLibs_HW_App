@@ -7,26 +7,20 @@ import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDeta
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class UserDetailsPresenter(
-    private val domainUsersModel: DomainUsersModel
+class UserDetailsPresenter @AssistedInject constructor(
+    private val router: Router,
+    private val appScreensRepository: AppScreensRepository,
+    private val networkStatus: NetworkStatus,
+    private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase,
+    @Assisted private val domainUsersModel: DomainUsersModel
 ) : MvpPresenter<UserDetailsView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var appScreensRepository: AppScreensRepository
-
-    @Inject
-    lateinit var networkStatus: NetworkStatus
-
-    @Inject
-    lateinit var getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -58,4 +52,9 @@ class UserDetailsPresenter(
     fun backPressed() {
         router.exit()
     }
+}
+
+@AssistedFactory
+interface UserDetailsPresenterFactory {
+    fun presenter(usersModel: DomainUsersModel): UserDetailsPresenter
 }

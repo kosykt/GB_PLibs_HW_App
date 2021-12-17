@@ -5,23 +5,19 @@ import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class RepoDetailsPresenter(
-    private val domainUserDetailsModel: DomainUserDetailsModel,
+class RepoDetailsPresenter @AssistedInject constructor(
+    private val router: Router,
+    private val githubRepoUseCase: GetGithubRepoUseCase,
+    private val networkStatus: NetworkStatus,
+    @Assisted private val domainUserDetailsModel: DomainUserDetailsModel
 ) : MvpPresenter<RepoDetailsView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var githubRepoUseCase: GetGithubRepoUseCase
-
-    @Inject
-    lateinit var networkStatus: NetworkStatus
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -50,4 +46,9 @@ class RepoDetailsPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface RepoDetailsPresenterFactory {
+    fun presenter(userDetailsModel: DomainUserDetailsModel): RepoDetailsPresenter
 }

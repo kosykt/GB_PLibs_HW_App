@@ -27,9 +27,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView,
     }
 
     private val presenter by moxyPresenter {
-        UserDetailsPresenter(domainUsersModel).apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.userDetailsPresenterFactory().presenter(domainUsersModel)
     }
 
     private val adapter by lazy {

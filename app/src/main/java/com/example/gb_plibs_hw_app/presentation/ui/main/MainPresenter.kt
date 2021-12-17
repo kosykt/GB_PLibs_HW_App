@@ -5,13 +5,10 @@ import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class MainPresenter : MvpPresenter<MainView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var appScreensRepository: AppScreensRepository
+class MainPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreensRepository: AppScreensRepository,
+) : MvpPresenter<MainView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
