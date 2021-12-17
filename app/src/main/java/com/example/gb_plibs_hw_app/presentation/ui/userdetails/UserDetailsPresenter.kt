@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
-import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
+import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
 import com.example.gb_plibs_hw_app.presentation.AppScreens
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -13,9 +13,9 @@ import moxy.MvpPresenter
 
 class UserDetailsPresenter(
     private val router: Router,
-    private val usersList: UsersListModel,
+    private val usersModel: UsersModel,
     userDetailsRepository: GithubUserDetailsRepository
-): MvpPresenter<UserDetailsView>() {
+) : MvpPresenter<UserDetailsView>() {
 
     private val getGithubUserDetailsUseCase =
         GetGithubUserDetailsUseCase(userDetailsRepository = userDetailsRepository)
@@ -26,7 +26,10 @@ class UserDetailsPresenter(
     }
 
     private fun loadData() {
-        getGithubUserDetailsUseCase.execute(usersList.reposUrl)
+        getGithubUserDetailsUseCase.execute(
+            userReposUrl = usersModel.reposUrl,
+            userId = usersModel.id
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -39,7 +42,7 @@ class UserDetailsPresenter(
             )
     }
 
-    fun onRepoClicked(userDetailsModel: UserDetailsModel){
+    fun onRepoClicked(userDetailsModel: UserDetailsModel) {
         router.navigateTo(AppScreens.repoDetailsScreen(userDetailsModel = userDetailsModel))
     }
 

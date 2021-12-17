@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
-import com.example.gb_plibs_hw_app.data.repository.GetGithubRepoRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.data.network.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.databinding.FragmentRepoDetailsBinding
 import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.repodetails.model.RepoModel
+import com.example.gb_plibs_hw_app.domain.repodetails.model.UserRepoModel
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -21,11 +23,17 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
         RepoDetailsPresenter(
             router = App.instance.router,
             userDetailsModel = userDetailsModel,
-            githubRepoRepository = GetGithubRepoRepositoryImpl(ApiHolder.retrofitService)
+            githubRepoRepository = GithubRepoRepositoryImpl(
+                networkStatus = status,
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance
+            )
         )
     }
 
@@ -58,18 +66,18 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         return true
     }
 
-    companion object{
+    companion object {
 
         private const val KEY_REPO_MODEL = "KEY_REPO_MODEL"
 
-        fun newInstance(repo: UserDetailsModel):RepoDetailsFragment{
+        fun newInstance(repo: UserDetailsModel): RepoDetailsFragment {
             return RepoDetailsFragment().apply {
                 arguments = bundleOf(KEY_REPO_MODEL to repo)
             }
         }
     }
 
-    override fun showRepoDetails(repoModel: RepoModel) {
-        binding.repoTv.text = repoModel.forksCount.toString()
+    override fun showRepoDetails(userRepoModel: UserRepoModel) {
+        binding.repoTv.text = userRepoModel.forksCount.toString()
     }
 }

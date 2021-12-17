@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.data.nerwork
+package com.example.gb_plibs_hw_app.data.network
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson

@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.presentation.App
 import com.example.gb_plibs_hw_app.databinding.FragmentUsersBinding
-import com.example.gb_plibs_hw_app.data.repository.GithubUsersListRepositoryImpl
-import com.example.gb_plibs_hw_app.domain.users.model.UsersListModel
-import com.example.gb_plibs_hw_app.data.nerwork.ApiHolder
+import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
+import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
+import com.example.gb_plibs_hw_app.data.network.ApiHolder
 import com.example.gb_plibs_hw_app.presentation.ui.base.BackButtonListener
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.GlideImageLoader
 import com.example.gb_plibs_hw_app.presentation.ui.users.adapter.UsersAdapter
@@ -19,10 +21,16 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
+    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+
     private val presenter by moxyPresenter {
         UsersPresenter(
             router = App.instance.router,
-            usersListRepository = GithubUsersListRepositoryImpl(ApiHolder.retrofitService),
+            usersListRepository = GithubUsersListRepositoryImpl(
+                networkStatus = status,
+                retrofitService = ApiHolder.retrofitService,
+                db = AppDatabase.instance
+            )
         )
     }
     private var _binding: FragmentUsersBinding? = null
@@ -57,8 +65,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         _binding = null
     }
 
-    override fun updateList(usersLists: List<UsersListModel>) {
-        adapter.submitList(usersLists)
+    override fun updateList(usersModel: List<UsersModel>) {
+        adapter.submitList(usersModel)
     }
 
     override fun showLoading() {

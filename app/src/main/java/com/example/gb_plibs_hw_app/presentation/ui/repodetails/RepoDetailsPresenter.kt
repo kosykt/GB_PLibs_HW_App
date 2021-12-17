@@ -24,7 +24,7 @@ class RepoDetailsPresenter(
     }
 
     private fun loadData() {
-        githubRepoUseCase.execute(repoUrl = userDetailsModel.url)
+        githubRepoUseCase.execute(repoUrl = userDetailsModel.url, repoId = userDetailsModel.id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
