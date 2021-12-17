@@ -40,7 +40,7 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView,
             userDetailsRepository = GithubUserDetailsRepositoryImpl(
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
-            )
+            ), appScreensRepository = TODO()
         )
     }
 

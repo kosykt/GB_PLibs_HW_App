@@ -15,10 +15,10 @@ class RepoDetailsPresenter(
     private val domainUserDetailsModel: DomainUserDetailsModel,
     private val networkStatus: NetworkStatus,
     githubRepoRepository: GithubRepoRepository
-): MvpPresenter<RepoDetailsView>() {
+) : MvpPresenter<RepoDetailsView>() {
 
     private val githubRepoUseCase =
-        GetGithubRepoUseCase(repository = githubRepoRepository)
+        GetGithubRepoUseCase(repoRepository = githubRepoRepository)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

@@ -7,17 +7,17 @@ import com.example.gb_plibs_hw_app.presentation.ui.userdetails.UserDetailsFragme
 import com.example.gb_plibs_hw_app.presentation.ui.users.UsersFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
-object AppScreens {
+class AppScreensRepositoryImpl : AppScreensRepository {
 
-    fun usersScreen() = FragmentScreen {
+    override fun usersScreen() = FragmentScreen {
         UsersFragment()
     }
 
-    fun userDetailsScreen(domainUsersModel: DomainUsersModel) = FragmentScreen {
-        UserDetailsFragment.newInstance(domainUsersModel = domainUsersModel)
+    override fun userDetailsScreen(usersModel: DomainUsersModel) = FragmentScreen {
+        UserDetailsFragment.newInstance(domainUsersModel = usersModel)
     }
 
-    fun repoDetailsScreen(domainUserDetailsModel: DomainUserDetailsModel) = FragmentScreen {
-        RepoDetailsFragment.newInstance(repo = domainUserDetailsModel)
+    override fun repoDetailsScreen(userDetailsModel: DomainUserDetailsModel) = FragmentScreen {
+        RepoDetailsFragment.newInstance(repo = userDetailsModel)
     }
 }

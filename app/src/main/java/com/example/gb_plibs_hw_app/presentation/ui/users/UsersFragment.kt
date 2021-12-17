@@ -30,7 +30,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
             usersListRepository = GithubUsersListRepositoryImpl(
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
-            )
+            ), appScreensRepository = TODO()
         )
     }
     private var _binding: FragmentUsersBinding? = null

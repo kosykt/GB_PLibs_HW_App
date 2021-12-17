@@ -5,7 +5,7 @@ import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
-import com.example.gb_plibs_hw_app.presentation.AppScreens
+import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -14,6 +14,7 @@ import moxy.MvpPresenter
 class UsersPresenter(
     private val router: Router,
     private val networkStatus: NetworkStatus,
+    private val appScreensRepository: AppScreensRepository,
     usersListRepository: GithubUsersListRepository
 ) : MvpPresenter<UsersView>() {
 
@@ -43,7 +44,7 @@ class UsersPresenter(
     }
 
     fun onUserClicked(domainUsersModel: DomainUsersModel) {
-        router.navigateTo(AppScreens.userDetailsScreen(domainUsersModel = domainUsersModel))
+        router.navigateTo(appScreensRepository.userDetailsScreen(usersModel = domainUsersModel))
     }
 
     fun backPressed(): Boolean {
