@@ -6,6 +6,10 @@ import io.reactivex.rxjava3.core.Single
 
 class GetGithubRepoUseCase(private val repository: GithubRepoRepository) {
 
-    fun execute(repoUrl: String, repoId: String): Single<DomainUserRepoModel> =
-        repository.getRepoDetails(repoUrl = repoUrl, repoId = repoId)
+    fun execute(repoUrl: String, repoId: String, network: Boolean): Single<DomainUserRepoModel> {
+        return when (network) {
+            true -> repository.getNetworkRepoDetails(repoUrl)
+            false -> repository.getDbRepoDetails(repoId)
+        }
+    }
 }

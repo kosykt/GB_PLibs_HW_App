@@ -5,5 +5,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface GithubRepoRepository {
 
-    fun getRepoDetails(repoUrl: String, repoId: String): Single<DomainUserRepoModel>
+    fun getNetworkRepoDetails(repoUrl: String): Single<DomainUserRepoModel>
+
+    fun getDbRepoDetails(repoId: String): Single<DomainUserRepoModel>
 }

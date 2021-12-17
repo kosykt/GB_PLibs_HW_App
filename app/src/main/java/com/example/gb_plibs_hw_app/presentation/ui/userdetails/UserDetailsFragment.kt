@@ -30,14 +30,14 @@ class UserDetailsFragment : MvpAppCompatFragment(), UserDetailsView,
         requireArguments().getSerializable(KEY_USER_MODEL) as DomainUsersModel
     }
 
-    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+    private val networkStatus by lazy { NetworkStatus(requireContext().applicationContext) }
 
     private val presenter by moxyPresenter {
         UserDetailsPresenter(
             router = App.instance.router,
             domainUsersModel = domainUsersModel,
+            networkStatus = networkStatus,
             userDetailsRepository = GithubUserDetailsRepositoryImpl(
-                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )

@@ -1,6 +1,7 @@
 package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
@@ -12,6 +13,7 @@ import moxy.MvpPresenter
 class RepoDetailsPresenter(
     private val router: Router,
     private val domainUserDetailsModel: DomainUserDetailsModel,
+    private val networkStatus: NetworkStatus,
     githubRepoRepository: GithubRepoRepository
 ): MvpPresenter<RepoDetailsView>() {
 
@@ -26,7 +28,8 @@ class RepoDetailsPresenter(
     private fun loadData() {
         githubRepoUseCase.execute(
             repoUrl = domainUserDetailsModel.url,
-            repoId = domainUserDetailsModel.id
+            repoId = domainUserDetailsModel.id,
+            network = networkStatus.isOnline()
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

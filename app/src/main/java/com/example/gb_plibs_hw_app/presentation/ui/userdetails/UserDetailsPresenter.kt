@@ -1,6 +1,7 @@
 package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 
 import android.util.Log
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
@@ -14,6 +15,7 @@ import moxy.MvpPresenter
 class UserDetailsPresenter(
     private val router: Router,
     private val domainUsersModel: DomainUsersModel,
+    private val networkStatus: NetworkStatus,
     userDetailsRepository: GithubUserDetailsRepository
 ) : MvpPresenter<UserDetailsView>() {
 
@@ -28,7 +30,8 @@ class UserDetailsPresenter(
     private fun loadData() {
         getGithubUserDetailsUseCase.execute(
             userReposUrl = domainUsersModel.reposUrl,
-            userId = domainUsersModel.id
+            userId = domainUsersModel.id,
+            network = networkStatus.isOnline()
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -23,14 +23,14 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     private val binding
         get() = _binding!!
 
-    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+    private val networkStatus by lazy { NetworkStatus(requireContext().applicationContext) }
 
     private val presenter by moxyPresenter {
         RepoDetailsPresenter(
             router = App.instance.router,
             domainUserDetailsModel = domainUserDetailsModel,
+            networkStatus = networkStatus,
             githubRepoRepository = GithubRepoRepositoryImpl(
-                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )
@@ -45,7 +45,7 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRepoDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }

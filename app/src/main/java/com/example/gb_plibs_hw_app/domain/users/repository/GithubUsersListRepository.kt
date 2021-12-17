@@ -5,5 +5,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface GithubUsersListRepository {
 
-    fun getUsersList(): Single<List<DomainUsersModel>>
+    fun getNetworkUsersList(): Single<List<DomainUsersModel>>
+
+    fun getDbUsersList(): Single<List<DomainUsersModel>>
 }

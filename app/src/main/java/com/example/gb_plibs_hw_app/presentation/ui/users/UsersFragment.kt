@@ -21,13 +21,13 @@ import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
-    private val status by lazy { NetworkStatus(requireContext().applicationContext) }
+    private val networkStatus by lazy { NetworkStatus(requireContext().applicationContext) }
 
     private val presenter by moxyPresenter {
         UsersPresenter(
             router = App.instance.router,
+            networkStatus = networkStatus,
             usersListRepository = GithubUsersListRepositoryImpl(
-                networkStatus = status,
                 retrofitService = ApiHolder.retrofitService,
                 db = AppDatabase.instance
             )

@@ -1,6 +1,5 @@
 package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.networkToDomainUserDetailsModel
@@ -11,26 +10,23 @@ import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetai
 import io.reactivex.rxjava3.core.Single
 
 class GithubUserDetailsRepositoryImpl(
-    private val networkStatus: NetworkStatus,
     private val retrofitService: RetrofitService,
     private val db: AppDatabase
 ) : GithubUserDetailsRepository {
 
-    override fun getDetailsList(
-        reposUrl: String, userId: String
-    ): Single<List<DomainUserDetailsModel>> {
-
-        return when (networkStatus.isOnline()) {
-            true -> retrofitService.getDetails(url = reposUrl)
-                .doOnSuccess {
-                    db.userDetailsDao.insert(it.networkToRoomUserDetailsModel())
-                }
-                .map {
-                    it.networkToDomainUserDetailsModel()
-                }
-            false -> Single.fromCallable {
-                db.userDetailsDao.getByUserId(userId = userId).roomToDomainUserDetailsModel()
+    override fun getNetworkDetailsList(reposUrl: String): Single<List<DomainUserDetailsModel>> {
+        return retrofitService.getDetails(url = reposUrl)
+            .doOnSuccess {
+                db.userDetailsDao.insert(it.networkToRoomUserDetailsModel())
             }
+            .map {
+                it.networkToDomainUserDetailsModel()
+            }
+    }
+
+    override fun getDbDetailsList(userId: String): Single<List<DomainUserDetailsModel>> {
+        return Single.fromCallable {
+            db.userDetailsDao.getByUserId(userId = userId).roomToDomainUserDetailsModel()
         }
     }
 }

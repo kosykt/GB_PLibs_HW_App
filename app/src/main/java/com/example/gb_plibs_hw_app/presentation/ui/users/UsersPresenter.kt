@@ -1,6 +1,7 @@
 package com.example.gb_plibs_hw_app.presentation.ui.users
 
 import android.util.Log
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
@@ -12,6 +13,7 @@ import moxy.MvpPresenter
 
 class UsersPresenter(
     private val router: Router,
+    private val networkStatus: NetworkStatus,
     usersListRepository: GithubUsersListRepository
 ) : MvpPresenter<UsersView>() {
 
@@ -25,7 +27,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        getGithubUsersListUseCase.execute()
+        getGithubUsersListUseCase.execute(network = networkStatus.isOnline())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
