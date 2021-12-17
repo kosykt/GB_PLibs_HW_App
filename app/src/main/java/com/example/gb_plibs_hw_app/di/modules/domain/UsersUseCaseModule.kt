@@ -7,15 +7,18 @@ import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListReposi
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class UsersUseCaseModule {
 
+    @Singleton
     @Provides
     fun usersUseCase(usersListRepository: GithubUsersListRepository): GetGithubUsersListUseCase {
         return GetGithubUsersListUseCase(usersListRepository)
     }
 
+    @Singleton
     @Provides
     fun usersListRepository(
         retrofitService: RetrofitService,
