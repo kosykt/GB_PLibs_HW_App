@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.di.modules.presentation
 
-import com.example.gb_plibs_hw_app.presentation.AppScreensRepository
-import com.example.gb_plibs_hw_app.presentation.AppScreensRepositoryImpl
+import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
+import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepositoryImpl
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
