@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gb_plibs_hw_app.databinding.ItemDetailsBinding
-import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
+import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 
 class DetailsAdapter(
-    private val itemClickListener: (UserDetailsModel) -> Unit
-) : ListAdapter<UserDetailsModel, DetailsAdapter.DetailsViewHolder>(GithubDetailsItemCallBack) {
+    private val itemClickListener: (DomainUserDetailsModel) -> Unit
+) : ListAdapter<DomainUserDetailsModel, DetailsAdapter.DetailsViewHolder>(GithubDetailsItemCallBack) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailsViewHolder {
@@ -25,20 +25,26 @@ class DetailsAdapter(
 
     inner class DetailsViewHolder(private val vb: ItemDetailsBinding) :
         RecyclerView.ViewHolder(vb.root) {
-        fun showDetails(userDetails: UserDetailsModel) {
-            vb.root.setOnClickListener { itemClickListener(userDetails) }
-            vb.itemDetailTv.text = userDetails.name
+        fun showDetails(domainUserDetails: DomainUserDetailsModel) {
+            vb.root.setOnClickListener { itemClickListener(domainUserDetails) }
+            vb.itemDetailTv.text = domainUserDetails.name
         }
     }
 }
 
-object GithubDetailsItemCallBack : DiffUtil.ItemCallback<UserDetailsModel>() {
+object GithubDetailsItemCallBack : DiffUtil.ItemCallback<DomainUserDetailsModel>() {
 
-    override fun areItemsTheSame(oldItem: UserDetailsModel, newItem: UserDetailsModel): Boolean {
+    override fun areItemsTheSame(
+        oldItem: DomainUserDetailsModel,
+        newItem: DomainUserDetailsModel
+    ): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: UserDetailsModel, newItem: UserDetailsModel): Boolean {
+    override fun areContentsTheSame(
+        oldItem: DomainUserDetailsModel,
+        newItem: DomainUserDetailsModel
+    ): Boolean {
         return oldItem == newItem
     }
 }
