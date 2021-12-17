@@ -1,22 +1,23 @@
 package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
-import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
+import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class RepoDetailsPresenter(
+class RepoDetailsPresenter @AssistedInject constructor(
     private val router: Router,
-    private val userDetailsModel: UserDetailsModel,
-    githubRepoRepository: GithubRepoRepository
-): MvpPresenter<RepoDetailsView>() {
-
-    private val githubRepoUseCase =
-        GetGithubRepoUseCase(repository = githubRepoRepository)
+    private val githubRepoUseCase: GetGithubRepoUseCase,
+    private val networkStatus: NetworkStatus,
+    @Assisted private val domainUserDetailsModel: DomainUserDetailsModel
+) : MvpPresenter<RepoDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -24,7 +25,11 @@ class RepoDetailsPresenter(
     }
 
     private fun loadData() {
-        githubRepoUseCase.execute(repoUrl = userDetailsModel.url, repoId = userDetailsModel.id)
+        githubRepoUseCase.execute(
+            repoUrl = domainUserDetailsModel.url,
+            repoId = domainUserDetailsModel.id,
+            network = networkStatus.isOnline()
+        )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -41,4 +46,9 @@ class RepoDetailsPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface RepoDetailsPresenterFactory {
+    fun presenter(userDetailsModel: DomainUserDetailsModel): RepoDetailsPresenter
 }

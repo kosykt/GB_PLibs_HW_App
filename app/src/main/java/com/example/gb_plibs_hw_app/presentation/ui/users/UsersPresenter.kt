@@ -1,22 +1,22 @@
 package com.example.gb_plibs_hw_app.presentation.ui.users
 
 import android.util.Log
-import com.github.terrakok.cicerone.Router
-import moxy.MvpPresenter
-import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
-import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
-import com.example.gb_plibs_hw_app.presentation.AppScreens
+import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
+import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UsersPresenter(
+class UsersPresenter @Inject constructor(
     private val router: Router,
-    usersListRepository: GithubUsersListRepository
+    private val appScreensRepository: AppScreensRepository,
+    private val networkStatus: NetworkStatus,
+    private val getGithubUsersListUseCase: GetGithubUsersListUseCase
 ) : MvpPresenter<UsersView>() {
-
-    private val getGithubUsersListUseCase =
-        GetGithubUsersListUseCase(usersListRepository = usersListRepository)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -25,7 +25,7 @@ class UsersPresenter(
     }
 
     private fun loadData() {
-        getGithubUsersListUseCase.execute()
+        getGithubUsersListUseCase.execute(network = networkStatus.isOnline())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showLoading() }
@@ -40,8 +40,8 @@ class UsersPresenter(
             )
     }
 
-    fun onUserClicked(usersModel: UsersModel) {
-        router.navigateTo(AppScreens.userDetailsScreen(usersModel = usersModel))
+    fun onUserClicked(domainUsersModel: DomainUsersModel) {
+        router.navigateTo(appScreensRepository.userDetailsScreen(usersModel = domainUsersModel))
     }
 
     fun backPressed(): Boolean {

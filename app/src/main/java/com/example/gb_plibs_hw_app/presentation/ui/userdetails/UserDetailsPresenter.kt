@@ -1,24 +1,26 @@
 package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 
 import android.util.Log
-import com.example.gb_plibs_hw_app.domain.userdetails.model.UserDetailsModel
-import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
+import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
-import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
-import com.example.gb_plibs_hw_app.presentation.AppScreens
+import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
+import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
 import com.github.terrakok.cicerone.Router
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class UserDetailsPresenter(
+class UserDetailsPresenter @AssistedInject constructor(
     private val router: Router,
-    private val usersModel: UsersModel,
-    userDetailsRepository: GithubUserDetailsRepository
+    private val appScreensRepository: AppScreensRepository,
+    private val networkStatus: NetworkStatus,
+    private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase,
+    @Assisted private val domainUsersModel: DomainUsersModel
 ) : MvpPresenter<UserDetailsView>() {
-
-    private val getGithubUserDetailsUseCase =
-        GetGithubUserDetailsUseCase(userDetailsRepository = userDetailsRepository)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -27,8 +29,9 @@ class UserDetailsPresenter(
 
     private fun loadData() {
         getGithubUserDetailsUseCase.execute(
-            userReposUrl = usersModel.reposUrl,
-            userId = usersModel.id
+            userReposUrl = domainUsersModel.reposUrl,
+            userId = domainUsersModel.id,
+            network = networkStatus.isOnline()
         )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -42,11 +45,16 @@ class UserDetailsPresenter(
             )
     }
 
-    fun onRepoClicked(userDetailsModel: UserDetailsModel) {
-        router.navigateTo(AppScreens.repoDetailsScreen(userDetailsModel = userDetailsModel))
+    fun onRepoClicked(domainUserDetailsModel: DomainUserDetailsModel) {
+        router.navigateTo(appScreensRepository.repoDetailsScreen(userDetailsModel = domainUserDetailsModel))
     }
 
     fun backPressed() {
         router.exit()
     }
+}
+
+@AssistedFactory
+interface UserDetailsPresenterFactory {
+    fun presenter(usersModel: DomainUsersModel): UserDetailsPresenter
 }

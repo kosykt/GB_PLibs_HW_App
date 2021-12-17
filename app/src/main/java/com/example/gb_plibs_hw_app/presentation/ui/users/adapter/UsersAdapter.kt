@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gb_plibs_hw_app.databinding.ItemUserBinding
-import com.example.gb_plibs_hw_app.domain.users.model.UsersModel
+import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.presentation.ui.imageloading.ImageLoader
 
 class UsersAdapter(
-    private val itemClickListener: (UsersModel) -> Unit,
+    private val itemClickListener: (DomainUsersModel) -> Unit,
     private val imageLoader: ImageLoader<ImageView>
-) : ListAdapter<UsersModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
+) : ListAdapter<DomainUsersModel, UsersAdapter.UserViewHolder>(GithubUserItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        return UserViewHolder(vb =
+        return UserViewHolder(
+            vb =
             ItemUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
@@ -27,23 +28,23 @@ class UsersAdapter(
 
     inner class UserViewHolder(private val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root) {
 
-        fun showUser(usersModel: UsersModel) {
-            vb.root.setOnClickListener { itemClickListener(usersModel) }
+        fun showUser(domainUsersModel: DomainUsersModel) {
+            vb.root.setOnClickListener { itemClickListener(domainUsersModel) }
 
-            vb.tvLogin.text = usersModel.login
+            vb.tvLogin.text = domainUsersModel.login
 
-            imageLoader.loadInto(usersModel.avatarUrl, vb.userImage)
+            imageLoader.loadInto(domainUsersModel.avatarUrl, vb.userImage)
         }
     }
 }
 
-object GithubUserItemCallback : DiffUtil.ItemCallback<UsersModel>() {
+object GithubUserItemCallback : DiffUtil.ItemCallback<DomainUsersModel>() {
 
-    override fun areItemsTheSame(oldItem: UsersModel, newItem: UsersModel): Boolean {
+    override fun areItemsTheSame(oldItem: DomainUsersModel, newItem: DomainUsersModel): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: UsersModel, newItem: UsersModel): Boolean {
+    override fun areContentsTheSame(oldItem: DomainUsersModel, newItem: DomainUsersModel): Boolean {
         return oldItem == newItem
     }
 }
