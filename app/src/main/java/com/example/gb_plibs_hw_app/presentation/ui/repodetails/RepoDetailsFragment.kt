@@ -24,7 +24,9 @@ class RepoDetailsFragment : MvpAppCompatFragment(), RepoDetailsView, BackButtonL
     }
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.repoDetailsPresenterFactory().presenter(domainUserDetailsModel)
+        App.instance.initRepoSubcomponent()
+        App.instance.repoSubcomponent?.repoDetailsPresenterFactory()
+            ?.presenter(domainUserDetailsModel)!!
     }
 
     override fun onCreateView(
