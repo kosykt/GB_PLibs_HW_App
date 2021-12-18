@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.di.modules.domain
 
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetails
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
@@ -21,9 +21,9 @@ class UserRepoUseCaseModule {
     @Singleton
     @Provides
     fun repoRepository(
+        roomCacheRepoDetails: RoomCacheRepoDetails,
         retrofitService: RetrofitService,
-        db: AppDatabase
     ): GithubRepoRepository {
-        return GithubRepoRepositoryImpl(retrofitService, db)
+        return GithubRepoRepositoryImpl(roomCacheRepoDetails, retrofitService)
     }
 }

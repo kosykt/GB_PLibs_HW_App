@@ -3,6 +3,7 @@ package com.example.gb_plibs_hw_app.di.modules.data
 import android.content.Context
 import androidx.room.Room
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetails
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,5 +18,13 @@ class DatabaseModule {
         return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun roomCacheRepoDetails(
+        db: AppDatabase
+    ): RoomCacheRepoDetails {
+        return RoomCacheRepoDetails(db)
     }
 }
