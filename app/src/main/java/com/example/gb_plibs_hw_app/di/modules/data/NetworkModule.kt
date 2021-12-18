@@ -3,8 +3,10 @@ package com.example.gb_plibs_hw_app.di.modules.data
 import android.content.Context
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
 import com.example.gb_plibs_hw_app.data.network.connection.RetrofitRepoDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.network.connection.RetrofitUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.data.network.retrofit.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RetrofitRepoDetailsRepository
+import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RetrofitUserDetailsRepository
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -28,6 +30,14 @@ class NetworkModule {
         retrofitService: RetrofitService
     ): RetrofitRepoDetailsRepository {
         return RetrofitRepoDetailsRepositoryImpl(retrofitService)
+    }
+
+    @Singleton
+    @Provides
+    fun retrofitUserDetailsRepository(
+        retrofitService: RetrofitService
+    ): RetrofitUserDetailsRepository {
+        return RetrofitUserDetailsRepositoryImpl(retrofitService)
     }
 
     @Singleton

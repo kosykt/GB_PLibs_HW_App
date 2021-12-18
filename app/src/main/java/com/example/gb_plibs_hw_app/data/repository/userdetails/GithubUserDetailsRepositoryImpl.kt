@@ -1,8 +1,8 @@
 package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.network.retrofit.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.networkToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.roomToDomainUserDetailsModel
+import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RetrofitUserDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
@@ -10,11 +10,11 @@ import io.reactivex.rxjava3.core.Single
 
 class GithubUserDetailsRepositoryImpl(
     private val roomCacheUserDetails: RoomCacheUserDetailsRepository,
-    private val retrofitService: RetrofitService
+    private val retrofitUserDetailsRepository: RetrofitUserDetailsRepository
 ) : GithubUserDetailsRepository {
 
     override fun getNetworkDetailsList(reposUrl: String): Single<List<DomainUserDetailsModel>> {
-        return retrofitService.getDetails(url = reposUrl)
+        return retrofitUserDetailsRepository.getUserDetails(reposUrl)
             .doOnSuccess {
                 roomCacheUserDetails.insertUserDetails(it)
             }
