@@ -3,9 +3,9 @@ package com.example.gb_plibs_hw_app.data.repository
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserDetailsModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserRepoModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUsersModel
-import com.example.gb_plibs_hw_app.data.network.model.NetworkUserDetailsModel
-import com.example.gb_plibs_hw_app.data.network.model.NetworkUserRepoModel
-import com.example.gb_plibs_hw_app.data.network.model.NetworkUsersModel
+import com.example.gb_plibs_hw_app.data.network.retrofit.model.NetworkUserDetailsModel
+import com.example.gb_plibs_hw_app.data.network.retrofit.model.NetworkUserRepoModel
+import com.example.gb_plibs_hw_app.data.network.retrofit.model.NetworkUsersModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.DomainUserRepoModel
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel

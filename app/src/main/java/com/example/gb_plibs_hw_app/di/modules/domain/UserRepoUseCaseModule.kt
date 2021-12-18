@@ -1,7 +1,7 @@
 package com.example.gb_plibs_hw_app.di.modules.domain
 
-import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
+import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RetrofitRepoDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
@@ -24,8 +24,8 @@ class UserRepoUseCaseModule {
     @Provides
     fun githubRepoRepository(
         roomCacheRepoDetails: RoomCacheRepoDetailsRepository,
-        retrofitService: RetrofitService,
+        retrofitRepoDetailsRepository: RetrofitRepoDetailsRepository,
     ): GithubRepoRepository {
-        return GithubRepoRepositoryImpl(roomCacheRepoDetails, retrofitService)
+        return GithubRepoRepositoryImpl(roomCacheRepoDetails, retrofitRepoDetailsRepository)
     }
 }

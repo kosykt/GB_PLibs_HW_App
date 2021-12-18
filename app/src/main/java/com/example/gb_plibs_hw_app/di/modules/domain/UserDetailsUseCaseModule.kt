@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.di.modules.domain
 
-import com.example.gb_plibs_hw_app.data.network.RetrofitService
+import com.example.gb_plibs_hw_app.data.network.retrofit.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository

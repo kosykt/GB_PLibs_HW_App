@@ -2,7 +2,7 @@ package com.example.gb_plibs_hw_app.data.db.cache
 
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.db.model.RoomUsersModel
-import com.example.gb_plibs_hw_app.data.network.model.NetworkUsersModel
+import com.example.gb_plibs_hw_app.data.network.retrofit.model.NetworkUsersModel
 import com.example.gb_plibs_hw_app.data.repository.networkToRoomUsersModel
 import com.example.gb_plibs_hw_app.data.repository.users.repository.RoomCacheUsersListRepository
 import io.reactivex.rxjava3.core.Single

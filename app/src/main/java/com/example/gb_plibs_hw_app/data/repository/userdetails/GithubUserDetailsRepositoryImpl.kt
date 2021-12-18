@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.network.RetrofitService
+import com.example.gb_plibs_hw_app.data.network.retrofit.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.networkToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.roomToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository

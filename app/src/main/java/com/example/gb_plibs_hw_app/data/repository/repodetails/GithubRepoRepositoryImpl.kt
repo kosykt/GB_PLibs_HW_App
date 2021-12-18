@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.data.repository.repodetails
 
-import com.example.gb_plibs_hw_app.data.network.RetrofitService
+import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RetrofitRepoDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.toDomainUserRepoModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.DomainUserRepoModel
@@ -9,11 +9,11 @@ import io.reactivex.rxjava3.core.Single
 
 class GithubRepoRepositoryImpl(
     private val roomCacheRepoDetails: RoomCacheRepoDetailsRepository,
-    private val retrofitService: RetrofitService
+    private val retrofitRepoDetailsRepository: RetrofitRepoDetailsRepository
 ) : GithubRepoRepository {
 
     override fun getNetworkRepoDetails(repoUrl: String): Single<DomainUserRepoModel> {
-        return retrofitService.getRepo(url = repoUrl)
+        return retrofitRepoDetailsRepository.getRepoDetails(repoUrl)
             .doOnSuccess {
                 roomCacheRepoDetails.insertRepoDetails(it)
             }.map {
