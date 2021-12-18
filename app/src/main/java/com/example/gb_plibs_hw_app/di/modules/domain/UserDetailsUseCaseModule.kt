@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.di.modules.domain
 
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetails
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.userdetails.GithubUserDetailsRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
@@ -23,9 +23,9 @@ class UserDetailsUseCaseModule {
     @Singleton
     @Provides
     fun userDetailsRepository(
+        roomCacheUserDetails: RoomCacheUserDetails,
         retrofitService: RetrofitService,
-        db: AppDatabase
     ): GithubUserDetailsRepository {
-        return GithubUserDetailsRepositoryImpl(retrofitService, db)
+        return GithubUserDetailsRepositoryImpl(roomCacheUserDetails, retrofitService)
     }
 }

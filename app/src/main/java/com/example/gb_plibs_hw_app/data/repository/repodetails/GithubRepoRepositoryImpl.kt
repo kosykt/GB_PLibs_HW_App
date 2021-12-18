@@ -8,21 +8,21 @@ import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepos
 import io.reactivex.rxjava3.core.Single
 
 class GithubRepoRepositoryImpl(
-    private val roomCache: RoomCacheRepoDetails,
+    private val roomCacheRepoDetails: RoomCacheRepoDetails,
     private val retrofitService: RetrofitService
 ) : GithubRepoRepository {
 
     override fun getNetworkRepoDetails(repoUrl: String): Single<DomainUserRepoModel> {
         return retrofitService.getRepo(url = repoUrl)
             .doOnSuccess {
-                roomCache.insertRepoDetails(it)
+                roomCacheRepoDetails.insertRepoDetails(it)
             }.map {
                 it.toDomainUserRepoModel()
             }
     }
 
     override fun getDbRepoDetails(repoId: String): Single<DomainUserRepoModel> {
-        return roomCache.getRepoDetails(repoId)
+        return roomCacheRepoDetails.getRepoDetailsById(repoId)
             .map { it.toDomainUserRepoModel() }
     }
 }

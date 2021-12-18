@@ -11,7 +11,7 @@ class RoomCacheRepoDetails(private val db: AppDatabase) {
         db.repoDetailsDao.insert(repoDetails.toRoomUserRepoModel())
     }
 
-    fun getRepoDetails(repoId: String): Single<RoomUserRepoModel> {
+    fun getRepoDetailsById(repoId: String): Single<RoomUserRepoModel> {
         return db.repoDetailsDao.getRepoId(repoId)
     }
 }
