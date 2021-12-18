@@ -3,15 +3,17 @@ package com.example.gb_plibs_hw_app.data.db
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserDetailsModel
 import com.example.gb_plibs_hw_app.data.network.model.NetworkUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.networkToRoomUserDetailsModel
+import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import io.reactivex.rxjava3.core.Single
 
-class RoomCacheUserDetails(private val db: AppDatabase) {
+class RoomCacheUserDetailsRepositoryImpl(private val db: AppDatabase) :
+    RoomCacheUserDetailsRepository {
 
-    fun insertUserDetails(list: List<NetworkUserDetailsModel>) {
+    override fun insertUserDetails(list: List<NetworkUserDetailsModel>) {
         db.userDetailsDao.insert(list.networkToRoomUserDetailsModel())
     }
 
-    fun getUserDetailsById(userId: String): Single<List<RoomUserDetailsModel>> {
+    override fun getUserDetailsById(userId: String): Single<List<RoomUserDetailsModel>> {
         return db.userDetailsDao.getByUserId(userId)
     }
 }

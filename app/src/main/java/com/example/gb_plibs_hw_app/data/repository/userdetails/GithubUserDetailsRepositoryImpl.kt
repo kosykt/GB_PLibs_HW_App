@@ -1,15 +1,15 @@
 package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetails
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.networkToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.roomToDomainUserDetailsModel
+import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import io.reactivex.rxjava3.core.Single
 
 class GithubUserDetailsRepositoryImpl(
-    private val roomCacheUserDetails: RoomCacheUserDetails,
+    private val roomCacheUserDetails: RoomCacheUserDetailsRepository,
     private val retrofitService: RetrofitService
 ) : GithubUserDetailsRepository {
 

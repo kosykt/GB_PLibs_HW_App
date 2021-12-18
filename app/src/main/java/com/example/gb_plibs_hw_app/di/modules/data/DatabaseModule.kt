@@ -3,9 +3,12 @@ package com.example.gb_plibs_hw_app.di.modules.data
 import android.content.Context
 import androidx.room.Room
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetails
-import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetails
-import com.example.gb_plibs_hw_app.data.db.RoomCacheUsersList
+import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.RoomCacheUsersListRepositoryImpl
+import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository
+import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
+import com.example.gb_plibs_hw_app.data.repository.users.repository.RoomCacheUsersListRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -26,23 +29,23 @@ class DatabaseModule {
     @Provides
     fun roomCacheRepoDetails(
         db: AppDatabase
-    ): RoomCacheRepoDetails {
-        return RoomCacheRepoDetails(db)
+    ): RoomCacheRepoDetailsRepository {
+        return RoomCacheRepoDetailsRepositoryImpl(db)
     }
 
     @Singleton
     @Provides
     fun roomCacheUserDetails(
         db: AppDatabase
-    ): RoomCacheUserDetails {
-        return RoomCacheUserDetails(db)
+    ): RoomCacheUserDetailsRepository {
+        return RoomCacheUserDetailsRepositoryImpl(db)
     }
 
     @Singleton
     @Provides
     fun roomCacheUsersList(
         db: AppDatabase
-    ): RoomCacheUsersList {
-        return RoomCacheUsersList(db)
+    ): RoomCacheUsersListRepository {
+        return RoomCacheUsersListRepositoryImpl(db)
     }
 }
