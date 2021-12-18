@@ -60,4 +60,3 @@ class NetworkModule {
         return NetworkStatus(context)
     }
 }
-
