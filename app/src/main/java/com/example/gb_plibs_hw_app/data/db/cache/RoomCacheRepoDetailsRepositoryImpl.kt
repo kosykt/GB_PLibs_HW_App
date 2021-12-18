@@ -1,5 +1,6 @@
-package com.example.gb_plibs_hw_app.data.db
+package com.example.gb_plibs_hw_app.data.db.cache
 
+import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserRepoModel
 import com.example.gb_plibs_hw_app.data.network.model.NetworkUserRepoModel
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository

@@ -3,9 +3,9 @@ package com.example.gb_plibs_hw_app.di.modules.data
 import android.content.Context
 import androidx.room.Room
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
-import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetailsRepositoryImpl
-import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetailsRepositoryImpl
-import com.example.gb_plibs_hw_app.data.db.RoomCacheUsersListRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.cache.RoomCacheRepoDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.cache.RoomCacheUserDetailsRepositoryImpl
+import com.example.gb_plibs_hw_app.data.db.cache.RoomCacheUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.users.repository.RoomCacheUsersListRepository
