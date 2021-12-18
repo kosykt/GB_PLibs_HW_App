@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.gb_plibs_hw_app.data.db.AppDatabase
 import com.example.gb_plibs_hw_app.data.db.RoomCacheRepoDetails
 import com.example.gb_plibs_hw_app.data.db.RoomCacheUserDetails
+import com.example.gb_plibs_hw_app.data.db.RoomCacheUsersList
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -35,5 +36,13 @@ class DatabaseModule {
         db: AppDatabase
     ): RoomCacheUserDetails {
         return RoomCacheUserDetails(db)
+    }
+
+    @Singleton
+    @Provides
+    fun roomCacheUsersList(
+        db: AppDatabase
+    ): RoomCacheUsersList {
+        return RoomCacheUsersList(db)
     }
 }

@@ -1,6 +1,6 @@
 package com.example.gb_plibs_hw_app.di.modules.domain
 
-import com.example.gb_plibs_hw_app.data.db.AppDatabase
+import com.example.gb_plibs_hw_app.data.db.RoomCacheUsersList
 import com.example.gb_plibs_hw_app.data.network.RetrofitService
 import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
@@ -22,8 +22,8 @@ class UsersUseCaseModule {
     @Provides
     fun usersListRepository(
         retrofitService: RetrofitService,
-        db: AppDatabase
+        roomCacheUsersList: RoomCacheUsersList
     ): GithubUsersListRepository {
-        return GithubUsersListRepositoryImpl(retrofitService, db)
+        return GithubUsersListRepositoryImpl(retrofitService, roomCacheUsersList)
     }
 }
