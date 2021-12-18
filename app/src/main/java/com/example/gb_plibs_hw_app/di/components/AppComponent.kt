@@ -1,6 +1,7 @@
 package com.example.gb_plibs_hw_app.di.components
 
 import com.example.gb_plibs_hw_app.di.modules.data.BindsDataBase
+import com.example.gb_plibs_hw_app.di.modules.data.BindsNetwork
 import com.example.gb_plibs_hw_app.di.modules.data.DatabaseModule
 import com.example.gb_plibs_hw_app.di.modules.data.NetworkModule
 import com.example.gb_plibs_hw_app.di.modules.domain.*
@@ -27,7 +28,8 @@ import javax.inject.Singleton
         BindsRepoUseCase::class,
         BindsDetailsUseCase::class,
         BindsUsersUseCase::class,
-        BindsDataBase::class
+        BindsDataBase::class,
+        BindsNetwork::class
     ]
 )
 interface AppComponent {

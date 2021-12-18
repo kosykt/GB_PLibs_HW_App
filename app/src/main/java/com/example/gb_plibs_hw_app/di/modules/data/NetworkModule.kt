@@ -12,6 +12,7 @@ import com.example.gb_plibs_hw_app.data.repository.users.repository.RetrofitUser
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -65,28 +66,23 @@ class NetworkModule {
     fun networkStatus(context: Context): NetworkStatus {
         return NetworkStatus(context)
     }
+}
+
+@Module
+abstract class BindsNetwork {
 
     @Singleton
-    @Provides
-    fun retrofitRepoDetailsRepository(
-        retrofitService: RetrofitService
-    ): RetrofitRepoDetailsRepository {
-        return RetrofitRepoDetailsRepositoryImpl(retrofitService)
-    }
+    @Binds
+    abstract fun bindsRetrofitUsers(impl: RetrofitUsersListRepositoryImpl):
+            RetrofitUsersListRepository
 
     @Singleton
-    @Provides
-    fun retrofitUserDetailsRepository(
-        retrofitService: RetrofitService
-    ): RetrofitUserDetailsRepository {
-        return RetrofitUserDetailsRepositoryImpl(retrofitService)
-    }
+    @Binds
+    abstract fun bindsRetrofitDetails(impl: RetrofitUserDetailsRepositoryImpl):
+            RetrofitUserDetailsRepository
 
     @Singleton
-    @Provides
-    fun retrofitUsersListRepository(
-        retrofitService: RetrofitService
-    ): RetrofitUsersListRepository {
-        return RetrofitUsersListRepositoryImpl(retrofitService)
-    }
+    @Binds
+    abstract fun bindsRetrofitRepo(impl: RetrofitRepoDetailsRepositoryImpl):
+            RetrofitRepoDetailsRepository
 }
