@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di.modules.domain
+package com.example.gb_plibs_hw_app.di.modules.domain.details
 
 import com.example.gb_plibs_hw_app.domain.userdetails.repository.GithubUserDetailsRepository
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase

@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di.modules.domain
+package com.example.gb_plibs_hw_app.di.modules.domain.users
 
 import com.example.gb_plibs_hw_app.data.repository.users.GithubUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository

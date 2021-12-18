@@ -1,4 +1,4 @@
-package com.example.gb_plibs_hw_app.di.modules.domain
+package com.example.gb_plibs_hw_app.di.modules.domain.repo
 
 import com.example.gb_plibs_hw_app.data.repository.repodetails.GithubRepoRepositoryImpl
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
