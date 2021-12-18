@@ -2,6 +2,7 @@ package com.example.gb_plibs_hw_app.di.components
 
 import com.example.gb_plibs_hw_app.di.modules.data.DatabaseModule
 import com.example.gb_plibs_hw_app.di.modules.data.NetworkModule
+import com.example.gb_plibs_hw_app.di.modules.domain.BindsRepoUseCase
 import com.example.gb_plibs_hw_app.di.modules.domain.UserDetailsUseCaseModule
 import com.example.gb_plibs_hw_app.di.modules.domain.UserRepoUseCaseModule
 import com.example.gb_plibs_hw_app.di.modules.domain.UsersUseCaseModule
@@ -24,7 +25,8 @@ import javax.inject.Singleton
         UserRepoUseCaseModule::class,
         UsersUseCaseModule::class,
         DatabaseModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        BindsRepoUseCase::class
     ]
 )
 interface AppComponent {

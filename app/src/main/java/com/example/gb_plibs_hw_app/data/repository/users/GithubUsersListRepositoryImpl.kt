@@ -24,7 +24,6 @@ class GithubUsersListRepositoryImpl(
             }
     }
 
-
     override fun getDbUsersList(): Single<List<DomainUsersModel>> {
         return roomCacheUsersList.getUsersList()
             .map { it.roomToDomainUsersModel() }

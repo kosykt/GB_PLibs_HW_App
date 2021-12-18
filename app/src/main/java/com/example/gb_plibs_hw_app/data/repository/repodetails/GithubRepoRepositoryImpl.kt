@@ -7,8 +7,9 @@ import com.example.gb_plibs_hw_app.data.repository.toRoomUserRepoModel
 import com.example.gb_plibs_hw_app.domain.repodetails.model.DomainUserRepoModel
 import com.example.gb_plibs_hw_app.domain.repodetails.repository.GithubRepoRepository
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class GithubRepoRepositoryImpl(
+class GithubRepoRepositoryImpl @Inject constructor(
     private val roomCacheRepoDetails: RoomCacheRepoDetailsRepository,
     private val retrofitRepoDetailsRepository: RetrofitRepoDetailsRepository
 ) : GithubRepoRepository {
