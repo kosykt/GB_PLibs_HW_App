@@ -2,17 +2,10 @@ package com.example.gb_plibs_hw_app.di.modules.data
 
 import android.content.Context
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
-import com.example.gb_plibs_hw_app.data.network.connection.RetrofitRepoDetailsRepositoryImpl
-import com.example.gb_plibs_hw_app.data.network.connection.RetrofitUserDetailsRepositoryImpl
-import com.example.gb_plibs_hw_app.data.network.connection.RetrofitUsersListRepositoryImpl
 import com.example.gb_plibs_hw_app.data.network.retrofit.RetrofitService
-import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RetrofitRepoDetailsRepository
-import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RetrofitUserDetailsRepository
-import com.example.gb_plibs_hw_app.data.repository.users.repository.RetrofitUsersListRepository
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -68,21 +61,3 @@ class NetworkModule {
     }
 }
 
-@Module
-abstract class BindsNetwork {
-
-    @Singleton
-    @Binds
-    abstract fun bindsRetrofitUsers(impl: RetrofitUsersListRepositoryImpl):
-            RetrofitUsersListRepository
-
-    @Singleton
-    @Binds
-    abstract fun bindsRetrofitDetails(impl: RetrofitUserDetailsRepositoryImpl):
-            RetrofitUserDetailsRepository
-
-    @Singleton
-    @Binds
-    abstract fun bindsRetrofitRepo(impl: RetrofitRepoDetailsRepositoryImpl):
-            RetrofitRepoDetailsRepository
-}
