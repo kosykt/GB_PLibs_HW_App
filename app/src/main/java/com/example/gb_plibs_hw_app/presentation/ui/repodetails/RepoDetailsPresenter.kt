@@ -2,6 +2,7 @@ package com.example.gb_plibs_hw_app.presentation.ui.repodetails
 
 import android.util.Log
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.di.containers.RepoContainer
 import com.example.gb_plibs_hw_app.domain.repodetails.usecases.GetGithubRepoUseCase
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.github.terrakok.cicerone.Router
@@ -16,12 +17,18 @@ class RepoDetailsPresenter @AssistedInject constructor(
     private val router: Router,
     private val githubRepoUseCase: GetGithubRepoUseCase,
     private val networkStatus: NetworkStatus,
+    private val repoContainer: RepoContainer,
     @Assisted private val domainUserDetailsModel: DomainUserDetailsModel
 ) : MvpPresenter<RepoDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadData()
+    }
+
+    override fun onDestroy() {
+        repoContainer.destroyRepoSubcomponent()
+        super.onDestroy()
     }
 
     private fun loadData() {

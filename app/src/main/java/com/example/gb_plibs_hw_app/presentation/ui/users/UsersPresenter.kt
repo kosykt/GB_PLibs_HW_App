@@ -2,6 +2,7 @@ package com.example.gb_plibs_hw_app.presentation.ui.users
 
 import android.util.Log
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.di.containers.UsersContainer
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.domain.users.usecases.GetGithubUsersListUseCase
 import com.example.gb_plibs_hw_app.presentation.navigation.AppScreensRepository
@@ -15,13 +16,18 @@ class UsersPresenter @Inject constructor(
     private val router: Router,
     private val appScreensRepository: AppScreensRepository,
     private val networkStatus: NetworkStatus,
+    private val usersContainer: UsersContainer,
     private val getGithubUsersListUseCase: GetGithubUsersListUseCase
 ) : MvpPresenter<UsersView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         loadData()
+    }
+
+    override fun onDestroy() {
+        usersContainer.destroyUsersSubcomponent()
+        super.onDestroy()
     }
 
     private fun loadData() {

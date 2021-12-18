@@ -2,6 +2,7 @@ package com.example.gb_plibs_hw_app.presentation.ui.userdetails
 
 import android.util.Log
 import com.example.gb_plibs_hw_app.data.connectivity.NetworkStatus
+import com.example.gb_plibs_hw_app.di.containers.DetailsContainer
 import com.example.gb_plibs_hw_app.domain.userdetails.model.DomainUserDetailsModel
 import com.example.gb_plibs_hw_app.domain.userdetails.usecases.GetGithubUserDetailsUseCase
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
@@ -19,12 +20,18 @@ class UserDetailsPresenter @AssistedInject constructor(
     private val appScreensRepository: AppScreensRepository,
     private val networkStatus: NetworkStatus,
     private val getGithubUserDetailsUseCase: GetGithubUserDetailsUseCase,
+    private val detailsContainer: DetailsContainer,
     @Assisted private val domainUsersModel: DomainUsersModel
 ) : MvpPresenter<UserDetailsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         loadData()
+    }
+
+    override fun onDestroy() {
+        detailsContainer.destroyDetailsSubcomponent()
+        super.onDestroy()
     }
 
     private fun loadData() {
