@@ -22,4 +22,5 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun mainPresenter(): MainPresenter
+    fun usersSubcomponent(): UsersSubcomponent
 }
