@@ -28,30 +28,6 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun retrofitRepoDetailsRepository(
-        retrofitService: RetrofitService
-    ): RetrofitRepoDetailsRepository {
-        return RetrofitRepoDetailsRepositoryImpl(retrofitService)
-    }
-
-    @Singleton
-    @Provides
-    fun retrofitUserDetailsRepository(
-        retrofitService: RetrofitService
-    ): RetrofitUserDetailsRepository {
-        return RetrofitUserDetailsRepositoryImpl(retrofitService)
-    }
-
-    @Singleton
-    @Provides
-    fun retrofitUsersListRepository(
-        retrofitService: RetrofitService
-    ): RetrofitUsersListRepository {
-        return RetrofitUsersListRepositoryImpl(retrofitService)
-    }
-
-    @Singleton
-    @Provides
     fun retrofitService(
         retrofit: Retrofit
     ): RetrofitService {
@@ -88,5 +64,29 @@ class NetworkModule {
     @Provides
     fun networkStatus(context: Context): NetworkStatus {
         return NetworkStatus(context)
+    }
+
+    @Singleton
+    @Provides
+    fun retrofitRepoDetailsRepository(
+        retrofitService: RetrofitService
+    ): RetrofitRepoDetailsRepository {
+        return RetrofitRepoDetailsRepositoryImpl(retrofitService)
+    }
+
+    @Singleton
+    @Provides
+    fun retrofitUserDetailsRepository(
+        retrofitService: RetrofitService
+    ): RetrofitUserDetailsRepository {
+        return RetrofitUserDetailsRepositoryImpl(retrofitService)
+    }
+
+    @Singleton
+    @Provides
+    fun retrofitUsersListRepository(
+        retrofitService: RetrofitService
+    ): RetrofitUsersListRepository {
+        return RetrofitUsersListRepositoryImpl(retrofitService)
     }
 }

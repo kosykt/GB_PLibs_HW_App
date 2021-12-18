@@ -8,8 +8,9 @@ import com.example.gb_plibs_hw_app.data.repository.users.repository.RoomCacheUse
 import com.example.gb_plibs_hw_app.domain.users.model.DomainUsersModel
 import com.example.gb_plibs_hw_app.domain.users.repository.GithubUsersListRepository
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class GithubUsersListRepositoryImpl(
+class GithubUsersListRepositoryImpl @Inject constructor(
     private val retrofitUsersListRepository: RetrofitUsersListRepository,
     private val roomCacheUsersList: RoomCacheUsersListRepository
 ) : GithubUsersListRepository {

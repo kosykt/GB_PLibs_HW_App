@@ -1,11 +1,9 @@
 package com.example.gb_plibs_hw_app.di.components
 
+import com.example.gb_plibs_hw_app.di.modules.data.BindsDataBase
 import com.example.gb_plibs_hw_app.di.modules.data.DatabaseModule
 import com.example.gb_plibs_hw_app.di.modules.data.NetworkModule
-import com.example.gb_plibs_hw_app.di.modules.domain.BindsRepoUseCase
-import com.example.gb_plibs_hw_app.di.modules.domain.UserDetailsUseCaseModule
-import com.example.gb_plibs_hw_app.di.modules.domain.UserRepoUseCaseModule
-import com.example.gb_plibs_hw_app.di.modules.domain.UsersUseCaseModule
+import com.example.gb_plibs_hw_app.di.modules.domain.*
 import com.example.gb_plibs_hw_app.di.modules.presentation.CiceroneModule
 import com.example.gb_plibs_hw_app.di.modules.presentation.ContextModule
 import com.example.gb_plibs_hw_app.presentation.ui.main.MainActivity
@@ -26,7 +24,10 @@ import javax.inject.Singleton
         UsersUseCaseModule::class,
         DatabaseModule::class,
         NetworkModule::class,
-        BindsRepoUseCase::class
+        BindsRepoUseCase::class,
+        BindsDetailsUseCase::class,
+        BindsUsersUseCase::class,
+        BindsDataBase::class
     ]
 )
 interface AppComponent {

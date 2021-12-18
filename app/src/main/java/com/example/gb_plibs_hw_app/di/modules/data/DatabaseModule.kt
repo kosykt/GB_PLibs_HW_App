@@ -9,6 +9,7 @@ import com.example.gb_plibs_hw_app.data.db.cache.RoomCacheUsersListRepositoryImp
 import com.example.gb_plibs_hw_app.data.repository.repodetails.repository.RoomCacheRepoDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RoomCacheUserDetailsRepository
 import com.example.gb_plibs_hw_app.data.repository.users.repository.RoomCacheUsersListRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -24,28 +25,23 @@ class DatabaseModule {
             .fallbackToDestructiveMigration()
             .build()
     }
+}
+
+@Module
+abstract class BindsDataBase {
 
     @Singleton
-    @Provides
-    fun roomCacheRepoDetails(
-        db: AppDatabase
-    ): RoomCacheRepoDetailsRepository {
-        return RoomCacheRepoDetailsRepositoryImpl(db)
-    }
+    @Binds
+    abstract fun bindsRoomCacheUsers(impl: RoomCacheUsersListRepositoryImpl):
+            RoomCacheUsersListRepository
 
     @Singleton
-    @Provides
-    fun roomCacheUserDetails(
-        db: AppDatabase
-    ): RoomCacheUserDetailsRepository {
-        return RoomCacheUserDetailsRepositoryImpl(db)
-    }
+    @Binds
+    abstract fun bindsRoomCacheDetails(impl: RoomCacheUserDetailsRepositoryImpl):
+            RoomCacheUserDetailsRepository
 
     @Singleton
-    @Provides
-    fun roomCacheUsersList(
-        db: AppDatabase
-    ): RoomCacheUsersListRepository {
-        return RoomCacheUsersListRepositoryImpl(db)
-    }
+    @Binds
+    abstract fun bindsRoomCacheRepo(impl: RoomCacheRepoDetailsRepositoryImpl):
+            RoomCacheRepoDetailsRepository
 }
