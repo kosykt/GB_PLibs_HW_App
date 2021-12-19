@@ -16,10 +16,8 @@ class GithubRepoRepositoryImpl @Inject constructor(
 
     override fun getNetworkRepoDetails(repoUrl: String): Single<DomainUserRepoModel> {
         return retrofitRepoDetailsRepository.getRepoDetails(repoUrl)
-            .doOnSuccess {
+            .flatMap {
                 roomCacheRepoDetails.insertRepoDetails(it.toRoomUserRepoModel())
-            }.map {
-                it.toDomainUserRepoModel()
             }
     }
 

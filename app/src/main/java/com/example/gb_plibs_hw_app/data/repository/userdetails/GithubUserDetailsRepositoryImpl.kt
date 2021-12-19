@@ -1,6 +1,5 @@
 package com.example.gb_plibs_hw_app.data.repository.userdetails
 
-import com.example.gb_plibs_hw_app.data.repository.networkToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.networkToRoomUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.roomToDomainUserDetailsModel
 import com.example.gb_plibs_hw_app.data.repository.userdetails.repository.RetrofitUserDetailsRepository
@@ -17,11 +16,8 @@ class GithubUserDetailsRepositoryImpl @Inject constructor(
 
     override fun getNetworkDetailsList(reposUrl: String): Single<List<DomainUserDetailsModel>> {
         return retrofitUserDetailsRepository.getUserDetails(reposUrl)
-            .doOnSuccess {
+            .flatMap {
                 roomCacheUserDetails.insertUserDetails(it.networkToRoomUserDetailsModel())
-            }
-            .map {
-                it.networkToDomainUserDetailsModel()
             }
     }
 
