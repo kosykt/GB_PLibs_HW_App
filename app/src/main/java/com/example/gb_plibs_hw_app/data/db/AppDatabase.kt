@@ -9,7 +9,6 @@ import com.example.gb_plibs_hw_app.data.db.dao.UsersDao
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserDetailsModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserRepoModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUsersModel
-import com.example.gb_plibs_hw_app.presentation.App
 
 @Database(
     entities = [
