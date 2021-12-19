@@ -9,7 +9,6 @@ import com.example.gb_plibs_hw_app.data.db.dao.UsersDao
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserDetailsModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUserRepoModel
 import com.example.gb_plibs_hw_app.data.db.model.RoomUsersModel
-import com.example.gb_plibs_hw_app.presentation.App
 
 @Database(
     entities = [
@@ -17,8 +16,7 @@ import com.example.gb_plibs_hw_app.presentation.App
         RoomUserDetailsModel::class,
         RoomUserRepoModel::class
     ],
-    version = 1,
-    exportSchema = false
+    version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -26,13 +24,4 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val userDetailsDao: UserDetailsDao
     abstract val repoDetailsDao: RepoDetailsDao
 
-    companion object {
-        private const val DB_NAME = "database.db"
-
-        val instance by lazy {
-            Room.databaseBuilder(App.instance, AppDatabase::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
-        }
-    }
 }
