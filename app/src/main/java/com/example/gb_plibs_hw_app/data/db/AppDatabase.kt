@@ -17,22 +17,11 @@ import com.example.gb_plibs_hw_app.presentation.App
         RoomUserDetailsModel::class,
         RoomUserRepoModel::class
     ],
-    version = 1,
-    exportSchema = false
+    version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val usersDao: UsersDao
     abstract val userDetailsDao: UserDetailsDao
     abstract val repoDetailsDao: RepoDetailsDao
-
-    companion object {
-        private const val DB_NAME = "database.db"
-
-        val instance by lazy {
-            Room.databaseBuilder(App.instance, AppDatabase::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
-        }
-    }
 }
